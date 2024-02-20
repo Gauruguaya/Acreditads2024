@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <TextView
+        android:id="@+id/tviewTitAgenda"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:gravity="center"
+        android:text="AGENDA"
+        android:textSize="44sp" />
+
+    <TextView
+        android:id="@+id/tviewAgenda"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:gravity="center"
+        android:text="Lunes 7\nData Science\nMartes 8\n
+        IA\nMiércoles 9\nWebServices\nJueves 10\nOpenSource\n
+        Viernes 11\nEgresados"
+        android:textSize="24sp" />
+
+    <Button
+        android:id="@+id/btnInscripcion"
+        android:layout_width="351dp"
+        android:layout_height="80dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="40dp"
+        android:hint="INSCRIPCIÓN"
+        android:paddingHorizontal="75dp"
+        android:textColorHint="@color/white"
+        android:textSize="30sp" />
+
+    <Button
+        android:id="@+id/btnVolver"
+        android:layout_width="351dp"
+        android:layout_height="80dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:hint="VOLVER"
+        android:paddingHorizontal="75dp"
+        android:textColorHint="@color/white"
+        android:textSize="30sp" />
+
+</LinearLayout>

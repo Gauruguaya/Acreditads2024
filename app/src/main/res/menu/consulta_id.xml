@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+        <item
+            android:id="@+id/organizadores"
+            android:title="@string/organizadores"
+            android:icon="@drawable/baseline_settings_applications_24"
+            app:showAsAction="always"/>
+        
+        <item
+            android:id="@+id/palestrantes"
+            android:title="@string/palestrantes"
+            android:icon="@drawable/baseline_speaker_group_24"
+            app:showAsAction="always"/>
+
+        <item
+            android:id="@+id/asistentes"
+            android:title="@string/asistentes"
+            android:icon="@drawable/baseline_meeting_room_24"
+            app:showAsAction="always"/>
+
+</menu>

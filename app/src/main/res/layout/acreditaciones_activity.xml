@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="ACREDITACIONES"
+        android:layout_gravity="center"
+        android:textSize="34sp"/>
+
+    <EditText
+        android:id="@+id/edtIdUsuario"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="66dp"
+        android:hint="Id Usuario"
+        android:gravity="center"
+        android:textSize="20sp"/>
+
+    <EditText
+        android:id="@+id/edtLecturaQR"
+        android:layout_width="match_parent"
+        android:layout_height="350dp"
+        android:layout_marginTop="130dp"
+        android:hint="Lectura QR"
+        android:gravity="center"
+        android:textSize="20sp"/>
+
+    <Button
+        android:id="@+id/btnVolver"
+        android:layout_width="328dp"
+        android:layout_height="80dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="230dp"
+        android:hint="VOLVER"
+        android:paddingHorizontal="75dp"
+        android:textColorHint="@color/white"
+        android:textSize="30sp" />
+
+</LinearLayout>
