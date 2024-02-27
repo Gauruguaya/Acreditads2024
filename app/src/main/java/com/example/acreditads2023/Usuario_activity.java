@@ -67,6 +67,13 @@ public class Usuario_activity extends AppCompatActivity {
                     public void onResponse(Call<retorno_validacion> call, Response<retorno_validacion> response) {
                         retorno_validacion retorno = response.body();
                         Toast.makeText(getApplicationContext(),retorno.getAddress().toString(),Toast.LENGTH_LONG).show();
+                        if(retorno.getStatus().equals("valid")){
+                            UsuarioDAO uDAO = new UsuarioDAO(db);
+                            uDAO.salvar(u);
+                        }
+                        else{
+                            Toast.makeText(getApplicationContext(),"Digite un email válido",Toast.LENGTH_LONG).show();
+                        }
                     }
 
                     @Override
@@ -74,22 +81,7 @@ public class Usuario_activity extends AppCompatActivity {
                         t.getMessage();
                     }
                 });
-               /* String url = "https://api.aldeamo.com/rest/email/enviarCorreo/";
-                String apiKey = "https://api.ckpnd.com:5000/v1/email";
-
-                JSONObject jsonObject = new JSONObject();
-                try {
-                    jsonObject.put("https://api.ckpnd.com:5000/v1/email", apiKey);
-                    jsonObject.put("remitente", "semana.academica.if.livramento@gmail.com");
-                    jsonObject.put("destinatario", edtEmailUsuario.getText().toString());
-                    jsonObject.put("asunto", "Confirmación de inscripción");
-                    jsonObject.put("mensaje", "Hola " + edtNombreUsuario.getText().toString() + ", tu inscripción ha sido exitosa!");
-                }catch (Exception ex) {
-                    ex.printStackTrace();
-                }*/
-
-                UsuarioDAO uDAO = new UsuarioDAO(db);
-                //uDAO.salvar(u);
+                
             }
         });
 

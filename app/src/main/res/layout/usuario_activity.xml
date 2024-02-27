@@ -9,7 +9,7 @@
         android:id="@+id/tviewParticipacion"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="16dp"
         android:gravity="center"
         android:text="REGISTRO DE PARTICIPANTES"
         android:textSize="30dp" />
@@ -27,7 +27,7 @@
         android:id="@+id/edtApellidoUsuario"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         android:hint="Apellido"
         android:gravity="center"
         android:textSize="25dp"/>
@@ -36,7 +36,7 @@
         android:id="@+id/edtDocUsuario"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         android:hint="Documento de identidad"
         android:gravity="center"
         android:textSize="25dp"/>
@@ -45,7 +45,7 @@
         android:id="@+id/edtEmailUsuario"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         android:hint="Email"
         android:gravity="center"
         android:textSize="25dp"/>
@@ -54,7 +54,7 @@
         android:id="@+id/edtTipoUsuario"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         android:hint="Palestrante1/organizador2/asistente3"
         android:inputType="number"
         android:gravity="center"
@@ -74,7 +74,7 @@
     <Button
         android:id="@+id/btnVolver"
         android:layout_width="328dp"
-        android:layout_height="47dp"
+        android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="30dp"
         android:hint="VOLVER"

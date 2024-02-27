@@ -27,7 +27,7 @@
         android:id="@+id/edtAutorEvento"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         android:hint="Autor del evento"
         android:gravity="center"
         android:textSize="20sp"/>
@@ -36,7 +36,7 @@
         android:id="@+id/edtTipoEvento"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         android:hint="Conferencia1/taller2/curso3"
         android:inputType="number"
         android:gravity="center"
@@ -46,7 +46,7 @@
         android:id="@+id/edtFechaHoraEvento"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         android:hint="YYYY-MM-DD-HH-MM-SS"
         android:gravity="center"
         android:textSize="20sp"/>
@@ -55,7 +55,7 @@
         android:id="@+id/edtIdAdminEvento"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         android:hint="Id administrador del evento"
         android:inputType="number"
         android:gravity="center"
@@ -64,7 +64,7 @@
         android:id="@+id/edtQRaperturaEvento"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         android:hint="QR de apertura"
         android:gravity="center"
         android:textSize="20sp"/>
@@ -72,15 +72,15 @@
         android:id="@+id/edtQRcierreEvento"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         android:hint="QR de cierre"
         android:gravity="center"
         android:textSize="20sp"/>
 
     <Button
         android:id="@+id/btnAgregar"
-        android:layout_width="328dp"
-        android:layout_height="80dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="16dp"
         android:hint="AGREGAR"
@@ -90,8 +90,8 @@
 
     <Button
         android:id="@+id/btnVolver"
-        android:layout_width="328dp"
-        android:layout_height="80dp"
+        android:layout_width="290dp"
+        android:layout_height="72dp"
         android:layout_gravity="center"
         android:layout_marginTop="16dp"
         android:hint="VOLVER"

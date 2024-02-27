@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
 
         Button btnAcreditaciones = findViewById(R.id.btnAcreditaciones);
         btnAcreditaciones.setOnClickListener(view -> {
-            Intent intent = new Intent(getApplicationContext(), Consulta_id.class);
+            Intent intent = new Intent(getApplicationContext(), Acreditaciones_activity.class);
             startActivity(intent);
         });
 

@@ -5,7 +5,6 @@ public class retorno_validacion {
     private String address;
     private String status;
 
-    private String status_valid;
 
     public retorno_validacion(){
 
@@ -26,6 +25,4 @@ public class retorno_validacion {
     public void setStatus(String status) {
         this.status = status;
     }
-
-    
 }
