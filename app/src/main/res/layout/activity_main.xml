@@ -9,12 +9,12 @@
     tools:context=".MainActivity">
 
     <TextView
-        android:id="@+id/tvsabitads"
+        android:id="@+id/tvacreditads"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
         android:gravity="center"
-        android:text="SABiTADS\nBIENVENIDO/A"
+        android:text="ACREDiTADS\nBIENVENIDO/A"
         android:textSize="44sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -33,37 +33,37 @@
         android:textSize="30sp" />
 
     <Button
-        android:id="@+id/btnParticipacion"
+        android:id="@+id/btnRegistro"
         android:layout_width="332dp"
         android:layout_height="80dp"
         android:layout_gravity="center"
         android:layout_marginTop="40dp"
-        android:hint="PARTICIPACIÓN"
-        android:paddingHorizontal="75dp"
-        android:textColorHint="@color/white"
-        android:textSize="24sp" />
-
-    <Button
-        android:id="@+id/btnEventos"
-        android:layout_width="324dp"
-        android:layout_height="80dp"
-        android:layout_gravity="center"
-        android:layout_marginTop="30dp"
-        android:hint="EVENTOS"
+        android:hint="REGISTRO"
         android:paddingHorizontal="75dp"
         android:textColorHint="@color/white"
         android:textSize="30sp" />
 
     <Button
-        android:id="@+id/btnAcreditaciones"
+        android:id="@+id/btnAcreditacion"
         android:layout_width="324dp"
         android:layout_height="80dp"
         android:layout_gravity="center"
         android:layout_marginTop="30dp"
-        android:hint="ACREDITACIONES"
+        android:hint="ACREDITACIÓN"
         android:paddingHorizontal="75dp"
         android:textColorHint="@color/white"
-        android:textSize="21sp" />
+        android:textSize="24sp" />
+
+    <Button
+        android:id="@+id/btnAdministracion"
+        android:layout_width="324dp"
+        android:layout_height="80dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="30dp"
+        android:hint="ADMINISTRACIÓN"
+        android:paddingHorizontal="75dp"
+        android:textColorHint="@color/white"
+        android:textSize="20sp" />
 
     <TextView
         android:id="@+id/tvemail"
@@ -77,6 +77,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
 
 </LinearLayout>

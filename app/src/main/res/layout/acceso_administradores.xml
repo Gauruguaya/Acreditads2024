@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <TextView
+        android:id="@+id/tviewAccesoAdm"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:text="ORGANIZADORES"
+        android:textSize="44sp" />
+
+    <TextView
+        android:id="@+id/tviewClaveAdm"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:gravity="center"
+        android:text="Clave de administrador"
+        android:textSize="24sp" />
+
+    <EditText
+        android:id="@+id/edtClaveAdm"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:hint="Digite su clave"
+        android:gravity="center"
+        android:textSize="24dp"/>
+
+    <Button
+        android:id="@+id/btnAgregarClave"
+        android:layout_width="351dp"
+        android:layout_height="80dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="26dp"
+        android:hint="AGREGAR"
+        android:paddingHorizontal="75dp"
+        android:textColorHint="@color/white"
+        android:textSize="30sp" />
+
+    <TextView
+        android:id="@+id/tviewTareaOrg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:gravity="center"
+        android:text="Tarea de organización"
+        android:textSize="24sp" />
+
+    <EditText
+        android:id="@+id/edtTareaOrg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:hint="Describa su tarea"
+        android:gravity="center"
+        android:textSize="24dp"/>
+
+    <Button
+        android:id="@+id/btnAgregarTarea"
+        android:layout_width="351dp"
+        android:layout_height="80dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="26dp"
+        android:hint="AGREGAR"
+        android:paddingHorizontal="75dp"
+        android:textColorHint="@color/white"
+        android:textSize="30sp" />
+
+    <Button
+        android:id="@+id/btnVolver"
+        android:layout_width="351dp"
+        android:layout_height="80dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="26dp"
+        android:hint="VOLVER"
+        android:paddingHorizontal="75dp"
+        android:textColorHint="@color/white"
+        android:textSize="30sp" />
+
+</LinearLayout>
