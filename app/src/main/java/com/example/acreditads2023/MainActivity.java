@@ -16,20 +16,20 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
         });
 
-        Button btnParticipacion = findViewById(R.id.btnParticipacion);
-        btnParticipacion.setOnClickListener(view -> {
+        Button btnRegistro = findViewById(R.id.btnRegistro);
+        btnRegistro.setOnClickListener(view -> {
             Intent intent = new Intent(getApplicationContext(), Usuario_activity.class);
             startActivity(intent);
         });
 
-        Button btnEventos = findViewById(R.id.btnEventos);
-        btnEventos.setOnClickListener(view -> {
+        Button btnAdministracion = findViewById(R.id.btnAdministracion);
+        btnAdministracion.setOnClickListener(view -> {
             Intent intent = new Intent(getApplicationContext(), Evento_activity.class);
             startActivity(intent);
         });
 
-        Button btnAcreditaciones = findViewById(R.id.btnAcreditaciones);
-        btnAcreditaciones.setOnClickListener(view -> {
+        Button btnAcreditacion = findViewById(R.id.btnAcreditacion);
+        btnAcreditacion.setOnClickListener(view -> {
             Intent intent = new Intent(getApplicationContext(), Acreditaciones_activity.class);
             startActivity(intent);
         });

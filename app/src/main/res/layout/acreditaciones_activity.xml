@@ -15,15 +15,6 @@
         android:textSize="44sp" />
 
     <EditText
-        android:id="@+id/edtIdUsuario"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:gravity="center"
-        android:hint="Id Usuario"
-        android:textSize="20sp" />
-
-    <EditText
         android:id="@+id/edtLecturaQR"
         android:layout_width="match_parent"
         android:layout_height="350dp"
@@ -31,6 +22,16 @@
         android:gravity="center"
         android:hint="Lectura QR"
         android:textSize="20sp" />
+    <Button
+        android:id="@+id/btnAgregarr"
+        android:layout_width="351dp"
+        android:layout_height="80dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="26dp"
+        android:hint="AGREGAR"
+        android:paddingHorizontal="75dp"
+        android:textColorHint="@color/white"
+        android:textSize="30sp" />
 
     <Button
         android:id="@+id/btnVolver"
