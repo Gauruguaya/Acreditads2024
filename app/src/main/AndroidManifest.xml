@@ -38,6 +38,8 @@
         <activity
             android:name=".Consulta_id"
             android:exported="false"/>
+        <activity android:name=".AccesoAdministradores"
+            android:exported="false" />
 
     </application>
 
