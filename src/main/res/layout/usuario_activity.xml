@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <TextView
+        android:id="@+id/tviewRegistroUsuarios"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:gravity="center"
+        android:text="REGISTRO DE USUARIOS"
+        android:textSize="30dp" />
+
+    <EditText
+        android:id="@+id/edtNombreUsuario"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:hint="Nombre"
+        android:gravity="center"
+        android:textSize="25dp"/>
+
+    <EditText
+        android:id="@+id/edtApellidoUsuario"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:hint="Apellido"
+        android:gravity="center"
+        android:textSize="25dp"/>
+
+    <EditText
+        android:id="@+id/edtDocUsuario"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:hint="Documento de identidad"
+        android:gravity="center"
+        android:textSize="25dp"/>
+
+    <EditText
+        android:id="@+id/edtEmailUsuario"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:hint="Email"
+        android:gravity="center"
+        android:textSize="25dp"/>
+
+    <EditText
+        android:id="@+id/edtTipoUsuario"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:hint="invitado 1/organizador 2/participante 3"
+        android:inputType="number"
+        android:gravity="center"
+        android:textSize="20dp"/>
+
+    <Button
+        android:id="@+id/btnRegistro"
+        android:layout_width="328dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="40dp"
+        android:hint="REGISTRARSE"
+        android:paddingHorizontal="75dp"
+        android:textColorHint="@color/white"
+        android:textSize="25dp" />
+
+    <Button
+        android:id="@+id/btnVolver"
+        android:layout_width="328dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="30dp"
+        android:hint="VOLVER"
+        android:paddingHorizontal="75dp"
+        android:textColorHint="@color/white"
+        android:textSize="30dp" />
+
+
+</LinearLayout>
