@@ -4,6 +4,8 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
 import android.widget.Button;
 import androidx.appcompat.app.AppCompatActivity;
 public class Agenda_activity extends AppCompatActivity {
@@ -15,8 +17,11 @@ public class Agenda_activity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.agenda_activity);
-        btnInscripcion = findViewById(R.id.btnInscripcion);
-        btnVolver = findViewById(R.id.btnVolver);
+
+        WebView webViewAgenda = findViewById(R.id.webViewAgenda);
+        WebSettings webSettings = webViewAgenda.getSettings();
+        webSettings.setJavaScriptEnabled(true);
+        webViewAgenda.loadUrl("https://www.even3.com.br/semabi-2023/");
 
         btnInscripcion = findViewById(R.id.btnInscripcion);
         btnInscripcion.setOnClickListener(new View.OnClickListener() {

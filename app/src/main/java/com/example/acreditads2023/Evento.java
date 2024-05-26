@@ -8,7 +8,9 @@ public class Evento extends AppCompatActivity {
     private  String autorEvento;
     private  int tipoEvento;
     private String fechaHoraEvento;
-    private  int idAdminEvento;
+    private  String administradorEvento;
+    private double latitudEvento;
+    private double longitudEvento;
 
     public Evento(){
         this.idEvento= -1;
@@ -16,7 +18,7 @@ public class Evento extends AppCompatActivity {
         this.autorEvento="";
         this.tipoEvento=-1;
         this.fechaHoraEvento="";
-        this.idAdminEvento=-1;
+        this.administradorEvento="";
     }
 
     public int getIdEvento() {
@@ -55,15 +57,27 @@ public class Evento extends AppCompatActivity {
         return fechaHoraEvento;
     }
 
+    public double getLatitudEvento() { return latitudEvento; }
+
+    public double getLongitudEvento() { return longitudEvento; }
+
     public void setFechaHoraEvento(String fechaHoraEvento) {
         this.fechaHoraEvento = fechaHoraEvento;
     }
 
-    public int getIdAdminEvento() {
-        return idAdminEvento;
+    public String getAdministradorEvento() {
+        return administradorEvento;
     }
 
-    public void setIdAdminEvento(int idAdminEvento) {
-        this.idAdminEvento = idAdminEvento;
+    public void setAdministradorEvento(String AdministradorEvento) {
+        this.administradorEvento = administradorEvento;
+    }
+
+    public void setLatitudEvento(double latitudEvento) {
+        this.latitudEvento = latitudEvento;
+    }
+
+    public void setLongitudEvento(double longitudEvento) {
+        this.longitudEvento = longitudEvento;
     }
 }

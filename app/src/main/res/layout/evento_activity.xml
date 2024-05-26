@@ -52,31 +52,34 @@
         android:textSize="20sp"/>
 
     <EditText
-        android:id="@+id/edtIdAdminEvento"
+        android:id="@+id/edtAdministradorEvento"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:hint="Id administrador del evento"
+        android:hint="Nombre del administrador del evento"
         android:inputType="number"
         android:gravity="center"
         android:textSize="20sp"/>
+
     <EditText
-        android:id="@+id/edtQRaperturaEvento"
+        android:id="@+id/edtLatitud"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:hint="QR de apertura"
-        android:gravity="center"
-        android:textSize="20sp"/>
-    <EditText
-        android:id="@+id/edtQRcierreEvento"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:hint="QR de cierre"
+        android:hint="Latitud del evento"
+        android:inputType="number"
         android:gravity="center"
         android:textSize="20sp"/>
 
+    <EditText
+        android:id="@+id/edtLongitud"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:hint="Longitud del evento"
+        android:inputType="number"
+        android:gravity="center"
+        android:textSize="20sp"/>
     <Button
         android:id="@+id/btnAgregar"
         android:layout_width="wrap_content"
