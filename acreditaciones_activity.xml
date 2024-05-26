@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <TextView
+        android:id="@+id/tviewAcreditaciones"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:text="ACREDITACIONES"
+        android:textSize="44sp" />
+
+    <EditText
+        android:id="@+id/edtidUsuario"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_margin="10dp"
+        android:gravity="center"
+        android:hint="Introduzca su id de usuario"
+        android:textSize="20sp" />
+
+    <EditText
+        android:id="@+id/edtLecturaQR"
+        android:layout_width="match_parent"
+        android:layout_height="320dp"
+        android:layout_margin="10dp"
+        android:gravity="center"
+        android:hint="Lectura QR"
+        android:textSize="20sp" />
+
+    <Button
+        android:id="@+id/btnAgregarr"
+        android:layout_width="329dp"
+        android:layout_height="80dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="6dp"
+        android:hint="AGREGAR"
+        android:paddingHorizontal="75dp"
+        android:textColorHint="@color/white"
+        android:textSize="30sp" />
+
+    <Button
+        android:id="@+id/btnVolver"
+        android:layout_width="329dp"
+        android:layout_height="80dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="16dp"
+        android:hint="VOLVER"
+        android:paddingHorizontal="75dp"
+        android:textColorHint="@color/white"
+        android:textSize="30sp" />
+
+</LinearLayout>

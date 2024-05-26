@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:id="@+id/tvacreditads"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:gravity="center"
+        android:text="ACREDiTADS\nBIENVENIDO/A"
+        android:textSize="44sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/btnAgenda"
+        android:layout_width="328dp"
+        android:layout_height="80dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="40dp"
+        android:hint="AGENDA"
+        android:paddingHorizontal="75dp"
+        android:textColorHint="@color/white"
+        android:textSize="30sp" />
+
+    <Button
+        android:id="@+id/btnRegistro"
+        android:layout_width="332dp"
+        android:layout_height="80dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="40dp"
+        android:hint="REGISTRO"
+        android:paddingHorizontal="75dp"
+        android:textColorHint="@color/white"
+        android:textSize="30sp" />
+
+    <Button
+        android:id="@+id/btnAcreditacion"
+        android:layout_width="324dp"
+        android:layout_height="80dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="30dp"
+        android:hint="ACREDITACIÓN"
+        android:paddingHorizontal="75dp"
+        android:textColorHint="@color/white"
+        android:textSize="24sp" />
+
+    <Button
+        android:id="@+id/btnAdministracion"
+        android:layout_width="324dp"
+        android:layout_height="80dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="30dp"
+        android:hint="ADMINISTRACIÓN"
+        android:paddingHorizontal="75dp"
+        android:textColorHint="@color/white"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/tvemail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:gravity="center"
+        android:text="semana.academica.if.livramento@gmail.com"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</LinearLayout>
