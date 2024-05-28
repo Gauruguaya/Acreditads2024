@@ -8,6 +8,10 @@ public class Acreditaciones {
     private String timeStamp;
     private String lecturaQR = "";
 
+
+    public Acreditaciones(){
+
+    }
     public Acreditaciones(int idUsuario, String timeStamp, String lecturaQR) {
         this.idInstalacion = idInstalacion;
         this.idUsuario = idUsuario;
