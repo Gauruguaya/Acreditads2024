@@ -10,7 +10,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         Button btnAgenda = findViewById(R.id.btnAgenda);
         btnAgenda.setOnClickListener(view -> {
             Intent intent = new Intent(getApplicationContext(), Agenda_activity.class);
@@ -23,16 +22,17 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
         });
 
+        Button btnAdministracion = findViewById(R.id.btnAdministracion);
+        btnAdministracion.setOnClickListener(view -> {
+            Intent intent = new Intent(getApplicationContext(), Evento_activity.class);
+            startActivity(intent);
+        });
+
         Button btnAcreditacion = findViewById(R.id.btnAcreditacion);
         btnAcreditacion.setOnClickListener(view -> {
             Intent intent = new Intent(getApplicationContext(), Acreditaciones_activity.class);
             startActivity(intent);
         });
 
-        Button btnAdministracion = findViewById(R.id.btnAdministracion);
-        btnAdministracion.setOnClickListener(view -> {
-            Intent intent = new Intent(getApplicationContext(), AccesoAdministradores.class);
-            startActivity(intent);
-        });
     }
 }

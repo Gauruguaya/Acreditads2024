@@ -8,7 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import java.util.ArrayList;
 import java.util.List;
 public class EventoDAO extends AppCompatActivity {
-    private final Database db;
+    private Database db;
     public EventoDAO(Database db){
         this.db = db;
     }
@@ -20,10 +20,8 @@ public class EventoDAO extends AppCompatActivity {
             values.put("tituloEvento", e.getTituloEvento());
             values.put("autorEvento",e.getAutorEvento());
             values.put("tipoEvento", e.getTipoEvento());
-            values.put("administradorEvento", e.getAdministradorEvento());
+            values.put("idAdminEvento", e.getIdAdminEvento());
             values.put("fechaHoraEvento", e.getFechaHoraEvento());
-            values.put("latitudEvento", e.getLatitudEvento());
-            values.put("longitudEvento", e.getLongitudEvento());
             idEvento = db2.insert("Evento", null, values);
         }
         catch (Exception ex){
@@ -35,9 +33,8 @@ public class EventoDAO extends AppCompatActivity {
     public List<Evento> buscarTodos(){
         List<Evento> todos = new ArrayList<>();
         SQLiteDatabase db2 = db.getReadableDatabase();
-        Cursor c = null;
         try{
-            c = db2.rawQuery("select * from Evento", null);
+            Cursor c = db2.rawQuery("select * from Evento", null);
             if (c.moveToFirst()){
                 do {
                     Evento e = new Evento();
@@ -45,18 +42,14 @@ public class EventoDAO extends AppCompatActivity {
                     e.setTituloEvento(c.getString(c.getColumnIndex("tituloEvento")));
                     e.setAutorEvento(c.getString(c.getColumnIndex("autorEvento")));
                     e.setTipoEvento(c.getInt(c.getColumnIndex("tipoEvento")));
-                    e.setAdministradorEvento(c.getString(c.getColumnIndex("AdministradorEvento")));
+                    e.setIdAdminEvento(c.getInt(c.getColumnIndex("idAdminEvento")));
                     e.setFechaHoraEvento(c.getString(c.getColumnIndex("fechaHoraEvento")));
-                    e.setLatitudEvento(c.getDouble(c.getColumnIndex("latitudEvento")));
-                    e.setLongitudEvento(c.getDouble(c.getColumnIndex("longitudEvento")));
                     todos.add(e);
                 }while (c.moveToNext());
             }
         }
         catch (Exception ex){
             ex.printStackTrace();
-        }finally {
-            c.close();
         }
         return todos;
     }

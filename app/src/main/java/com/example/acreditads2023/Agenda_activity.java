@@ -18,10 +18,10 @@ public class Agenda_activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.agenda_activity);
 
-        WebView webViewAgenda = findViewById(R.id.webViewAgenda);
+        /*WebView webViewAgenda = findViewById(R.id.webViewAgenda);
         WebSettings webSettings = webViewAgenda.getSettings();
         webSettings.setJavaScriptEnabled(true);
-        webViewAgenda.loadUrl("https://www.even3.com.br/semabi-2023/");
+        webViewAgenda.loadUrl("https://www.even3.com.br/semabi-2023/");*/
 
         btnInscripcion = findViewById(R.id.btnInscripcion);
         btnInscripcion.setOnClickListener(new View.OnClickListener() {

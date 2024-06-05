@@ -21,10 +21,7 @@ public class Database extends SQLiteOpenHelper {
                 "docUsuario text, emailUsuario text, tipoUsuario integer, tareaUsuario text, fechaHora text);");
         db.execSQL("create table if not exists Evento(idEvento " +
                 "integer primary key autoincrement, tituloEvento text, autorEvento text," +
-                "tipoEvento integer, fechaHoraEvento text, administradorEvento text, latitudEvento double, longitudEvento double);");
-        /*db.execSQL("create table if not exists Acreditaciones(idInstalacion integer primary key, idUsuario " +
-                "integer foreign key, idEvento integer foreign key, idInstalacion integer primary key autoincrement" +
-                lecturaQR, timeStamp);");*/
+                "tipoEvento integer, fechaHoraEvento text, idAdminEvento integer, qrApertura blob, qrCierre blob);");
     }
 
     @Override

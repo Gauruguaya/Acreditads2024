@@ -32,6 +32,17 @@
         android:gravity="center"
         android:textSize="24dp"/>
 
+    <Button
+        android:id="@+id/btnAgregarClave"
+        android:layout_width="351dp"
+        android:layout_height="80dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="26dp"
+        android:hint="AGREGAR"
+        android:paddingHorizontal="75dp"
+        android:textColorHint="@color/white"
+        android:textSize="30sp" />
+
     <TextView
         android:id="@+id/tviewTareaOrg"
         android:layout_width="match_parent"
@@ -51,7 +62,7 @@
         android:textSize="24dp"/>
 
     <Button
-        android:id="@+id/btnAgregarDatosAdm"
+        android:id="@+id/btnAgregarTarea"
         android:layout_width="351dp"
         android:layout_height="80dp"
         android:layout_gravity="center"
