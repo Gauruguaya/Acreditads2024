@@ -14,14 +14,19 @@
         android:text="ACREDITACIONES"
         android:textSize="44sp" />
 
-    <EditText
+    <androidx.camera.view.PreviewView
+        android:id="@+id/previewView"
+        android:layout_width="match_parent"
+        android:layout_height="400dp"/>
+
+    <!-- <EditText
         android:id="@+id/edtLecturaQR"
         android:layout_width="match_parent"
         android:layout_height="350dp"
         android:layout_marginTop="30dp"
         android:gravity="center"
         android:hint="Lectura QR"
-        android:textSize="20sp" />
+        android:textSize="20sp" /> -->
     <Button
         android:id="@+id/btnAgregarr"
         android:layout_width="351dp"
