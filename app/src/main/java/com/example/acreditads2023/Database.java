@@ -22,6 +22,9 @@ public class Database extends SQLiteOpenHelper {
         db.execSQL("create table if not exists Evento(idEvento " +
                 "integer primary key autoincrement, tituloEvento text, autorEvento text," +
                 "tipoEvento integer, fechaHoraEvento text, idAdminEvento integer, qrApertura blob, qrCierre blob);");
+        db.execSQL("create table if not exists Acreditaciones(idUsuario integer NOT NULL," +
+                "idInstalacion integer NOT NULL, idEvento integer NOT NULL, timeStamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP," +
+                "FOREIGN KEY(idInstalacion) REFERENCES Usuario(idInstalacion), FOREIGN KEY (idEvento) REFERENCES Evento(idEvento))");
     }
 
     @Override

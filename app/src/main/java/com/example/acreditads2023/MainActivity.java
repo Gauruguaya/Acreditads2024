@@ -24,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
 
         Button btnAdministracion = findViewById(R.id.btnAdministracion);
         btnAdministracion.setOnClickListener(view -> {
-            Intent intent = new Intent(getApplicationContext(), Evento_activity.class);
+            Intent intent = new Intent(getApplicationContext(), AccesoAdministradores.class);
             startActivity(intent);
         });
 
@@ -33,6 +33,12 @@ public class MainActivity extends AppCompatActivity {
             Intent intent = new Intent(getApplicationContext(), Acreditaciones_activity.class);
             startActivity(intent);
         });
+        Button btnMiActividad = findViewById(R.id.btnMiActividad);
+        btnMiActividad.setOnClickListener(view -> {
+            Intent intent = new Intent(getApplicationContext(), Consulta_id.class);
+            startActivity(intent);
+        });
+
 
     }
 }

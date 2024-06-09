@@ -55,4 +55,33 @@ public class AcreditacionesDAO {
         }
         return todos;
     }
+
+    public List<Evento> buscarUsuario(int idInstBuscada){
+        List<Evento> usuario = new ArrayList<>();
+        SQLiteDatabase db2 = db.getReadableDatabase();
+        Cursor u = null;
+        try{
+            u = db2.rawQuery("select e.tituloEvento FROM Evento e INNER JOIN Acreditaciones a ON+" +
+                    "e.idEvento = a.idEvento INNER JOIN Usuario u ON a.idUsuario = u.idUsuario WHERE+" +
+                    " u.idInstalacion ="+idInstBuscada, null);
+            if (u.moveToFirst()){
+                do {
+                    Evento au = new Evento();
+                    int idInstalacionIndex = u.getColumnIndex("idInstalación");
+                    if (idInstalacionIndex != -1) {
+                   //     au.setIdInstalacion(u.getInt(idInstalacionIndex));
+                    }
+                 //   au.setTituloEvento(u.getString(u.getColumnIndex("tituloEvento")));
+                    usuario.add(au);
+                }while (u.moveToNext());
+            }
+        }
+        catch (Exception ex){
+            ex.printStackTrace();
+        }finally {
+            u.close();
+        }
+        return usuario;
+    }
+
 }
