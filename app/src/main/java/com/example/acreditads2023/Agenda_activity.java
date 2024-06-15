@@ -21,7 +21,7 @@ public class Agenda_activity extends AppCompatActivity {
         WebView webViewAgenda = findViewById(R.id.webViewAgenda);
         WebSettings webSettings = webViewAgenda.getSettings();
         webSettings.setJavaScriptEnabled(true);
-        webViewAgenda.loadUrl("https://www.even3.com.br/semabi-2023/");
+        webViewAgenda.loadUrl("http://eventos.santana.ifsul.edu.br/semabi2024/sistema/index.php?id=consulta_inscricao");
 
         btnInscripcion = findViewById(R.id.btnInscripcion);
         btnInscripcion.setOnClickListener(new View.OnClickListener() {
