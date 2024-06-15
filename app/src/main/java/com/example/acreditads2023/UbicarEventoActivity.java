@@ -42,6 +42,8 @@ public class UbicarEventoActivity extends AppCompatActivity implements OnMapRead
     Location currentLocation;
     FusedLocationProviderClient fusedLocationProviderClient;
 
+    private String LatitudString;
+    private String LongitudString;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,29 +56,38 @@ public class UbicarEventoActivity extends AppCompatActivity implements OnMapRead
         txtLongitud = findViewById(R.id.txtLongitud);
 
         nombreEvento = getIntent().getStringExtra("NombreEvento");
-
-        //Devuelve los valores latitud y longitud
+        //###########################################################################################
+        //###############  Devuelve los valores latitud y longitud   ################################
+        //
         btnConfirmar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Obtener los valores de las variables que deseas devolver
-                String LatitudString = txtLatitud.getText().toString();
-                String LongitudString = txtLongitud.getText().toString();
-
-                // Crear un nuevo Intent
+                // Creo un nuevo Intent
                 Intent intent = new Intent();
+
+                // Obtener los valores de las variables que deseas devolver
+                LatitudString = txtLatitud.getText().toString();
+                LongitudString = txtLongitud.getText().toString();
 
                 // Agregar las variables al Intent como extras
                 intent.putExtra("Latitud", LatitudString);
                 intent.putExtra("Longitud", LongitudString);
 
                 // Establecer el código de resultado y finalizar la actividad
-                setResult(RESULT_OK, intent);
-                finish();
+                if (!LongitudString.isEmpty() && !LatitudString.isEmpty()){
+                    setResult(RESULT_OK, intent);
+                    finish();
+                } else {
+                    Log.e("Error","Algunos de los campos latitud o Longitud van vacios");
+                }
+
             }
         });
+        //###########################################################################################
+        //###########################################################################################
     }
 
+    //################################### AFUERA DEL onCreate #######################################
     private void getLastLocation() {
         if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.ACCESS_FINE_LOCATION},FINE_PERMISSION_CODE);
@@ -96,7 +107,9 @@ public class UbicarEventoActivity extends AppCompatActivity implements OnMapRead
             }
         });
     }
+    //###########################################################################################
 
+    //###########################################################################################
     @Override
     public void onMapReady(@NonNull GoogleMap googleMap) {
         mMap = googleMap;
@@ -105,10 +118,12 @@ public class UbicarEventoActivity extends AppCompatActivity implements OnMapRead
 
         //aca deberia estar la ubicacion de la persoana
         LatLng uruguay = new LatLng(currentLocation.getLatitude(),currentLocation.getLongitude()); //ubicacion ifsul -30.9008403,-55.5354775
-       // mMap.addMarker(new MarkerOptions().position(uruguay).title("mi ubicacion"));
+        // mMap.addMarker(new MarkerOptions().position(uruguay).title("mi ubicacion"));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(uruguay));
     }
+    //###########################################################################################
 
+    //###########################################################################################
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
@@ -120,7 +135,9 @@ public class UbicarEventoActivity extends AppCompatActivity implements OnMapRead
             }
         }
     }
+    //###########################################################################################
 
+    //###########################################################################################
     @Override
     public void onMapClick(@NonNull LatLng latLng) {
         txtLatitud.setText(""+latLng.latitude);
@@ -146,7 +163,9 @@ public class UbicarEventoActivity extends AppCompatActivity implements OnMapRead
         // dibuja mi circulo
         drawCircle(latLng,30);
     }
+    //###########################################################################################
 
+    //###########################################################################################
     @Override
     public void onMapLongClick(@NonNull LatLng latLng) {
         txtLatitud.setText(""+latLng.latitude);
@@ -161,4 +180,5 @@ public class UbicarEventoActivity extends AppCompatActivity implements OnMapRead
                 .strokeColor(Color.RED)
                 .fillColor(Color.argb(70,255,0,0)));
     }
+    //###########################################################################################
 }
