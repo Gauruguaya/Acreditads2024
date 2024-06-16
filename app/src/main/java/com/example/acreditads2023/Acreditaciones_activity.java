@@ -6,6 +6,7 @@ import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 import android.util.Size;
 import android.Manifest;
@@ -25,10 +26,12 @@ import androidx.core.content.ContextCompat;
 
 import com.google.common.util.concurrent.ListenableFuture;
 import com.google.mlkit.vision.barcode.BarcodeScanner;
+import com.google.mlkit.vision.barcode.BarcodeScannerOptions;
 import com.google.mlkit.vision.barcode.BarcodeScanning;
 import com.google.mlkit.vision.barcode.common.Barcode;
 import com.google.mlkit.vision.common.InputImage;
 
+import java.time.LocalDateTime;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -37,10 +40,11 @@ public class Acreditaciones_activity extends AppCompatActivity {
 
     private PreviewView previewView;
     private ExecutorService cameraExecutor;
-
+    private boolean isQRCodeDetected = false;
     private Button btnVolver;
-
     private View view;
+    private TextView txQrCodeResult;
+    private ProcessCameraProvider cameraProvider;
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +53,8 @@ public class Acreditaciones_activity extends AppCompatActivity {
 
         previewView = findViewById(R.id.previewView);
         cameraExecutor = Executors.newSingleThreadExecutor();
+
+        txQrCodeResult = findViewById(R.id.txQrCodeResult);
 
         if (allPermissionsGranted()) {
             startCamera();
@@ -77,39 +83,53 @@ public class Acreditaciones_activity extends AppCompatActivity {
 
         cameraProviderFuture.addListener(() -> {
             try {
-                ProcessCameraProvider cameraProvider = cameraProviderFuture.get();
+                cameraProvider = cameraProviderFuture.get();
                 bindPreview(cameraProvider);
             } catch (ExecutionException | InterruptedException e) {
-                e.printStackTrace();
+                Toast.makeText(this, "Erro ao inicializar a câmera: " + e.getMessage(), Toast.LENGTH_SHORT).show();
             }
         }, ContextCompat.getMainExecutor(this));
     }
 
     private void bindPreview(@NonNull ProcessCameraProvider cameraProvider) {
-        Preview preview = new Preview.Builder()
-                .build();
 
-        CameraSelector cameraSelector = new CameraSelector.Builder()
-                .requireLensFacing(CameraSelector.LENS_FACING_BACK)
-                .build();
+        try {
+            Preview preview = new Preview.Builder()
+                    .build();
 
-        ImageAnalysis imageAnalysis = new ImageAnalysis.Builder()
-                .setTargetResolution(new Size(1280, 720))
-                .setBackpressureStrategy(ImageAnalysis.STRATEGY_KEEP_ONLY_LATEST)
-                .build();
+            CameraSelector cameraSelector = new CameraSelector.Builder()
+                    .requireLensFacing(CameraSelector.LENS_FACING_BACK)
+                    .build();
 
-        imageAnalysis.setAnalyzer(cameraExecutor, new QRCodeAnalyzer());
+            ImageAnalysis imageAnalysis = new ImageAnalysis.Builder()
+                    .setTargetResolution(new Size(1280, 720))
+                    .setBackpressureStrategy(ImageAnalysis.STRATEGY_KEEP_ONLY_LATEST)
+                    .build();
 
-        preview.setSurfaceProvider(previewView.getSurfaceProvider());
+            imageAnalysis.setAnalyzer(cameraExecutor, new QRCodeAnalyzer());
 
-        cameraProvider.unbindAll();
-        cameraProvider.bindToLifecycle(this, cameraSelector, preview, imageAnalysis);
+            preview.setSurfaceProvider(previewView.getSurfaceProvider());
+
+            cameraProvider.unbindAll();
+            cameraProvider.bindToLifecycle(this, cameraSelector, preview, imageAnalysis);
+        } catch (Exception e) {
+            Toast.makeText(this, "Erro ao exibir a prévia: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+        }
     }
 
     private class QRCodeAnalyzer implements ImageAnalysis.Analyzer {
+        private final BarcodeScannerOptions options = new BarcodeScannerOptions.Builder()
+                .setBarcodeFormats(Barcode.FORMAT_QR_CODE)
+                .build();
 
         @Override
         public void analyze(@NonNull ImageProxy image) {
+
+            if (isQRCodeDetected) {
+                image.close();
+                return;
+            }
+
             //@androidx.camera.core.ExperimentalGetImage
             @OptIn(markerClass = ExperimentalGetImage.class)
             ImageProxy.PlaneProxy[] planes = image.getPlanes();
@@ -120,17 +140,33 @@ public class Acreditaciones_activity extends AppCompatActivity {
             @OptIn(markerClass = ExperimentalGetImage.class)
             InputImage inputImage = InputImage.fromMediaImage(image.getImage(), image.getImageInfo().getRotationDegrees());
 
-            BarcodeScanner scanner = BarcodeScanning.getClient();
+            BarcodeScanner scanner = BarcodeScanning.getClient(options);
             scanner.process(inputImage)
                     .addOnSuccessListener(barcodes -> {
                         for (Barcode barcode : barcodes) {
+                            isQRCodeDetected = true;
                             String rawValue = barcode.getRawValue();
-                            Toast.makeText(getApplicationContext(), rawValue, Toast.LENGTH_SHORT).show();
+                            handleQRCodeData(rawValue);
+                            break; // Para o processamento de futuros cóigos.
                         }
                     })
                     .addOnFailureListener(Throwable::printStackTrace)
                     .addOnCompleteListener(task -> image.close());
         }
+    }
+
+    private void handleQRCodeData(String data) {
+        // Executar aqui as ações com os dados lidos do QR Code.
+        // Mostrando um Toast apenas para demonstração do funcionamento.
+        Toast.makeText(this, "QR Code Data: " + data, Toast.LENGTH_LONG).show();
+
+        // Finaliza a prévia da câmera depois de fazer a leitura do código
+        stopCameraPreview();
+
+        txQrCodeResult.setText("Dados do código: "+data + "\n\n Timestamp: "+LocalDateTime.now());
+        previewView.setVisibility(View.INVISIBLE);
+        txQrCodeResult.setVisibility(TextView.VISIBLE);
+
     }
 
     @Override
@@ -140,9 +176,16 @@ public class Acreditaciones_activity extends AppCompatActivity {
             if (allPermissionsGranted()) {
                 startCamera();
             } else {
-                Toast.makeText(this, "Permissions not granted by the user.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Permissões não concedidas pelo usuário.", Toast.LENGTH_SHORT).show();
                 finish();
             }
+        }
+    }
+
+    private void stopCameraPreview() {
+        if (cameraProvider != null) {
+            cameraExecutor.shutdown();
+            cameraProvider.unbindAll();
         }
     }
 

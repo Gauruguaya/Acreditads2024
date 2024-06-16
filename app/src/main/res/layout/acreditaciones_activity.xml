@@ -14,11 +14,24 @@
         android:text="ACREDITACIONES"
         android:textSize="44sp" />
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
     <androidx.camera.view.PreviewView
         android:id="@+id/previewView"
         android:layout_width="match_parent"
         android:layout_height="400dp"/>
 
+    <TextView
+        android:visibility="invisible"
+        android:id="@+id/txQrCodeResult"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="30sp"
+        android:gravity=""
+        android:text="" />
+    </RelativeLayout>
     <!-- <EditText
         android:id="@+id/edtLecturaQR"
         android:layout_width="match_parent"
