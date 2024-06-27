@@ -13,57 +13,40 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 import androidx.core.content.ContextCompat;
-
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-
 public class Evento_activity extends AppCompatActivity {
-    private EditText edtTituloEvento;
-    private EditText edtAutorEvento;
-    private EditText edtTipoEvento;
-    private EditText edtFechaHoraEvento;
-    private EditText edtIdAdminEvento;
-    private EditText edtQRaperturaEvento;
-    private EditText edtQRcierreEvento;
-    private Button btnAgregar;
-    private Button btnVolver;
     private Database db;
-    private Button btnMapa;
-
-    private static final String CHANNEL_ID = "canal";
-
-    private static final int REQUEST_NOTIFICATION_PERMISSION = 1;
-
-    private RequestQueue requestQueue;
-
     private String Latitud,Longitud;
+    private RequestQueue requestQueue;
     private static final int REQUEST_CODE = 1;
-
+    private Button btnAgregar,btnVolver,btnMapa;
+    private static final String CHANNEL_ID = "canal";
+    private static final int REQUEST_NOTIFICATION_PERMISSION = 1;
+    private EditText edtTituloEvento,edtAutorEvento,edtTipoEvento,edtFechaHoraEvento,edtIdAdminEvento,edtQRaperturaEvento,edtQRcierreEvento;
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.evento_activity);
+
         requestQueue = Volley.newRequestQueue(this);
-        btnAgregar = findViewById(R.id.btnAgregar);
-        btnVolver = findViewById(R.id.btnVolver);
+
+        edtTipoEvento = findViewById(R.id.edtTipoEvento);
         edtTituloEvento = findViewById(R.id.edtTipoEvento);
         edtAutorEvento = findViewById(R.id.edtAutorEvento);
-        edtTipoEvento = findViewById(R.id.edtTipoEvento);
-        edtFechaHoraEvento = findViewById(R.id.edtFechaHoraEvento);
         edtIdAdminEvento = findViewById(R.id.edtIdAdminEvento);
-        db = new Database(getApplicationContext());
+        edtFechaHoraEvento = findViewById(R.id.edtFechaHoraEvento);
 
-        Toast.makeText(getApplicationContext(),"La latitud es: " + Latitud + ", Y la Longitud es: " + Longitud,Toast.LENGTH_SHORT).show();
+        db = new Database(getApplicationContext());
 
         btnAgregar = findViewById(R.id.btnAgregar);
         btnAgregar.setOnClickListener(new View.OnClickListener() {
@@ -100,7 +83,6 @@ public class Evento_activity extends AppCompatActivity {
                         Toast.makeText(getApplicationContext(), "Error al crear Evento", Toast.LENGTH_SHORT).show();
                     }
                 });
-
                 requestQueue.add(stringRequest);
             }
         });
@@ -113,6 +95,7 @@ public class Evento_activity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
         btnMapa = findViewById(R.id.btnAgregarMapa);
         btnMapa.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -125,9 +108,7 @@ public class Evento_activity extends AppCompatActivity {
             }
         });
     }
-    //################################### AFUERA DEL onCreate #######################################
 
-    //###########################################################################################
     // Recibe valores Latitud y Longitud
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -143,9 +124,7 @@ public class Evento_activity extends AppCompatActivity {
             Longitud = LongitudAux;
         }
     }
-    //###########################################################################################
 
-    //###########################################################################################
     private void verificarPermisoNotificaciones() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             // Verificar si el permiso de notificación está concedido
@@ -164,9 +143,7 @@ public class Evento_activity extends AppCompatActivity {
             enviarNotificacion();
         }
     }
-    //###########################################################################################
 
-    //###########################################################################################
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
@@ -182,9 +159,7 @@ public class Evento_activity extends AppCompatActivity {
             }
         }
     }
-    //###########################################################################################
 
-    //###########################################################################################
     private void configurarCanalNotificacion() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             NotificationChannel channel = new NotificationChannel(CHANNEL_ID,
@@ -194,9 +169,7 @@ public class Evento_activity extends AppCompatActivity {
             manager.createNotificationChannel(channel);
         }
     }
-    //###########################################################################################
 
-    //###########################################################################################
     private void enviarNotificacion() {
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this, CHANNEL_ID)
                 .setSmallIcon(R.drawable.ic_notification) // Icono de la notificación
@@ -216,6 +189,5 @@ public class Evento_activity extends AppCompatActivity {
             return;
         }
         notificationManager.notify(1, builder.build());
-        //###########################################################################################
     }
 }
