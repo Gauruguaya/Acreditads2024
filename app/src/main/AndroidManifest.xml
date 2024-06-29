@@ -60,6 +60,9 @@
         <activity
             android:name=".Consulta_id"
             android:exported="false" />
+        <activity
+            android:name=".AccesoAdm_activity"
+            android:exported="false" />
     </application>
 
 </manifest>

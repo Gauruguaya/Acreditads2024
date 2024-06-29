@@ -27,15 +27,19 @@ android {
         targetCompatibility = JavaVersion.VERSION_1_8
     }
     packagingOptions {
-        exclude ("META-INF/DEPENDENCIES")
-        exclude ("META-INF/LICENSE")
-        exclude ("META-INF/LICENSE.txt")
-        exclude ("META-INF/license.txt")
-        exclude ("META-INF/NOTICE")
-        exclude ("META-INF/NOTICE.txt")
-        exclude ("META-INF/notice.txt")
-        exclude ("META-INF/ASL2.0")
-        exclude ("META-INF/INDEX.LIST")
+        resources {
+            excludes += setOf(
+                "META-INF/DEPENDENCIES",
+                "META-INF/LICENSE",
+                "META-INF/LICENSE.txt",
+                "META-INF/license.txt",
+                "META-INF/NOTICE",
+                "META-INF/NOTICE.txt",
+                "META-INF/notice.txt",
+                "META-INF/ASL2.0",
+                "META-INF/INDEX.LIST"
+            )
+        }
     }
 }
 

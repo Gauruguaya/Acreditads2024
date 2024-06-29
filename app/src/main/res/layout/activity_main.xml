@@ -24,7 +24,7 @@
         android:layout_marginTop="40dp"
         android:gravity="center"
         android:text="ACREDiTADS\nBIENVENIDO/A"
-        android:textSize="44sp"
+        android:textSize="40sp"
       />
 
     <Button
@@ -77,10 +77,10 @@
         android:layout_height="80dp"
         android:layout_gravity="center"
         android:layout_marginTop="30dp"
-        android:hint="ADMINISTRACIÓN"
+        android:hint="ORGANIZACIÓN"
         android:paddingHorizontal="75dp"
         android:textColorHint="@color/white"
-        android:textSize="20sp" />
+        android:textSize="22sp" />
 
     <TextView
         android:id="@+id/tvemail"

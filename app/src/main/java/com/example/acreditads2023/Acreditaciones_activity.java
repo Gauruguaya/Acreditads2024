@@ -10,7 +10,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.util.Size;
 import android.Manifest;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.OptIn;
 import androidx.appcompat.app.AppCompatActivity;
@@ -23,21 +22,17 @@ import androidx.camera.lifecycle.ProcessCameraProvider;
 import androidx.camera.view.PreviewView;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
-
 import com.google.common.util.concurrent.ListenableFuture;
 import com.google.mlkit.vision.barcode.BarcodeScanner;
 import com.google.mlkit.vision.barcode.BarcodeScannerOptions;
 import com.google.mlkit.vision.barcode.BarcodeScanning;
 import com.google.mlkit.vision.barcode.common.Barcode;
 import com.google.mlkit.vision.common.InputImage;
-
 import java.time.LocalDateTime;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-
 public class Acreditaciones_activity extends AppCompatActivity {
-
     private PreviewView previewView;
     private ExecutorService cameraExecutor;
     private boolean isQRCodeDetected = false;
@@ -168,7 +163,6 @@ public class Acreditaciones_activity extends AppCompatActivity {
         txQrCodeResult.setVisibility(TextView.VISIBLE);
 
     }
-
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
@@ -181,14 +175,12 @@ public class Acreditaciones_activity extends AppCompatActivity {
             }
         }
     }
-
     private void stopCameraPreview() {
         if (cameraProvider != null) {
             cameraExecutor.shutdown();
             cameraProvider.unbindAll();
         }
     }
-
     @Override
     protected void onDestroy() {
         super.onDestroy();
