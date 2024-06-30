@@ -18,10 +18,10 @@ public class Database extends SQLiteOpenHelper {
         Log.d(TAG, "Creando tablas de la base de datos.");
         db.execSQL("create table if not exists Usuario(idUsuario " +
                 "integer primary key autoincrement, nombreUsuario text, apellidoUsuario text," +
-                "docUsuario text, emailUsuario text, tipoUsuario integer, tareaUsuario text, fechaHora text);");
+                "docUsuario text, emailUsuario text, tipoUsuario integer, tareaOrg text, fechaHora text);");
         db.execSQL("create table if not exists Evento(idEvento " +
                 "integer primary key autoincrement, tituloEvento text, autorEvento text," +
-                "tipoEvento integer, fechaHoraEvento text, idAdminEvento integer, qrApertura blob, qrCierre blob);");
+                "tipoEvento integer, fechaHoraEvento text, idAdminEvento integer);");
         db.execSQL("create table if not exists Acreditaciones(idUsuario integer NOT NULL," +
                 "idInstalacion integer NOT NULL, idEvento integer NOT NULL, timeStamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP," +
                 "FOREIGN KEY(idInstalacion) REFERENCES Usuario(idInstalacion), FOREIGN KEY (idEvento) REFERENCES Evento(idEvento))");

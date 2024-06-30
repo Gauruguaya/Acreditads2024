@@ -9,13 +9,12 @@ import android.widget.EditText;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class AccesoAdministradores extends AppCompatActivity {
-    private String claveAdm;
-    private String tareaUsuario;
-    private Button btnVolver;
+    private String claveAdm;//no sé si esta variable es necesaria aquí
+    private String tareaOrg;
 
     public AccesoAdministradores(String claveAdm, String tareaUsuario) {
         this.claveAdm = claveAdm;
-        this.tareaUsuario = tareaUsuario;
+        this.tareaOrg = tareaOrg;
     }
 
     public String getClaveAdm() {
@@ -26,25 +25,12 @@ public class AccesoAdministradores extends AppCompatActivity {
         this.claveAdm = claveAdm;
     }
 
-    public String getTareaUsuario() {
-        return tareaUsuario;
+    public String getTareaOrg() {
+        return tareaOrg;
     }
 
-    public void setTareaUsuario(String tareaUsuario) {
-        this.tareaUsuario = tareaUsuario;
+    public void setTareaOrg(String tareaUsuario) {
+        this.tareaOrg = tareaOrg;
     }
 
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.acceso_administradores);
-
-        btnVolver = findViewById(R.id.btnVolver);
-        btnVolver.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                startActivity(intent);
-            }
-        });
-    }
 }

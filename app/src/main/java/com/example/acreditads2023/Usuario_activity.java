@@ -14,18 +14,17 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
-
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
 public class Usuario_activity extends AppCompatActivity {
+
     private EditText edtNombreUsuario;
     private EditText edtApellidoUsuario;
     private EditText edtDocUsuario;
@@ -36,7 +35,6 @@ public class Usuario_activity extends AppCompatActivity {
     private Button btnVolver;
     private String idPlanilha = "1g6dIJTiR-4eIzbnwKUK6sXDjC6GYMCRElsbr_bVxPDQ";
     private String idInstalacion;
-
     private RequestQueue requestQueue;
     private static final int PERMISSION_REQUEST_CODE = 1;
 
@@ -92,7 +90,6 @@ public class Usuario_activity extends AppCompatActivity {
                         Log.e("Error", error.toString());
                     }
                 });
-
                 requestQueue.add(stringRequest);
             }
         });

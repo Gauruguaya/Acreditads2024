@@ -25,13 +25,14 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 public class Evento_activity extends AppCompatActivity {
     private Database db;
-    private String Latitud,Longitud;
+    private String latitud,longitud;
     private RequestQueue requestQueue;
     private static final int REQUEST_CODE = 1;
     private Button btnAgregar,btnVolver,btnMapa;
     private static final String CHANNEL_ID = "canal";
     private static final int REQUEST_NOTIFICATION_PERMISSION = 1;
-    private EditText edtTituloEvento,edtAutorEvento,edtTipoEvento,edtFechaHoraEvento,edtIdAdminEvento,edtQRaperturaEvento,edtQRcierreEvento;
+    private EditText edtTituloEvento,edtAutorEvento,edtTipoEvento,edtFechaHoraEvento,edtIdAdminEvento;
+
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,7 +59,6 @@ public class Evento_activity extends AppCompatActivity {
                 e.setTipoEvento(Integer.parseInt(edtTipoEvento.getText().toString()));
                 e.setFechaHoraEvento(edtFechaHoraEvento.getText().toString());
                 e.setIdAdminEvento(Integer.parseInt(edtIdAdminEvento.getText().toString()));
-
                 EventoDAO eDAO = new EventoDAO(db);
                 eDAO.salvar(e);
 
@@ -69,7 +69,7 @@ public class Evento_activity extends AppCompatActivity {
                 //Eu preciso puxar as variáveis aqui
                 String urlSheets = "https://script.google.com/macros/s/AKfycbxX1EInivW85EH1IGNZzh6bWJTLm6K9-ZRr3-wduHYFd34d1SW0dG2bAndm8CZvYPE/exec?action=evento&tituloEvento=" +
                         edtTituloEvento.getText().toString() + "&autorEvento=" + edtAutorEvento.getText().toString() +
-                        "&tipoEvento=" + edtTipoEvento.getText().toString() + "&fechaHoraEvento=" + edtFechaHoraEvento.getText().toString() + "&latitud=" + Latitud + "&longitud=" + Longitud;
+                        "&tipoEvento=" + edtTipoEvento.getText().toString() + "&fechaHoraEvento=" + edtFechaHoraEvento.getText().toString() + "&latitud=" + latitud + "&longitud=" + longitud;
 
                 StringRequest stringRequest = new StringRequest(Request.Method.GET, urlSheets, new com.android.volley.Response.Listener<String>() {
                     @Override
@@ -120,8 +120,8 @@ public class Evento_activity extends AppCompatActivity {
             String LongitudAux = data.getStringExtra("Longitud");
 
             // VARIABLES QUE CONTIENEN EL VALOR DEL EVENTO
-            Latitud = LatitudAux;
-            Longitud = LongitudAux;
+            latitud = LatitudAux;
+            longitud = LongitudAux;
         }
     }
 

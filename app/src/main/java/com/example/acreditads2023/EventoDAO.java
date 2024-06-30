@@ -22,6 +22,8 @@ public class EventoDAO extends AppCompatActivity {
             values.put("tipoEvento", e.getTipoEvento());
             values.put("idAdminEvento", e.getIdAdminEvento());
             values.put("fechaHoraEvento", e.getFechaHoraEvento());
+            values.put("latitud", e.getLatitud());
+            values.put("longitud", e.getLongitud());
             idEvento = db2.insert("Evento", null, values);
         }
         catch (Exception ex){
@@ -44,6 +46,8 @@ public class EventoDAO extends AppCompatActivity {
                     e.setTipoEvento(c.getInt(c.getColumnIndex("tipoEvento")));
                     e.setIdAdminEvento(c.getInt(c.getColumnIndex("idAdminEvento")));
                     e.setFechaHoraEvento(c.getString(c.getColumnIndex("fechaHoraEvento")));
+                    e.setLatitud(c.getString(c.getColumnIndex("latitud")));
+                    e.setLongitud(c.getString(c.getColumnIndex("longitud")));
                     todos.add(e);
                 }while (c.moveToNext());
             }

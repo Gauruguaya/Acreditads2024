@@ -9,7 +9,6 @@ public class Usuario extends AppCompatActivity {
     private String docUsuario;
     private String emailUsuario;
     private int tipoUsuario;
-    private String tareaUsuario;
     private String fechaHora;
 
     public Usuario() {
@@ -19,7 +18,6 @@ public class Usuario extends AppCompatActivity {
         this.docUsuario = "";
         this.emailUsuario = "";
         this.tipoUsuario = -1;
-        this.tareaUsuario = "";
         this.fechaHora = "";
     }
 
@@ -67,22 +65,13 @@ public class Usuario extends AppCompatActivity {
         return tipoUsuario;
     }
 
-    public void setTipoUsuario(int tipoUsuario) {
-        this.tipoUsuario = tipoUsuario;
-    }
-
-    public String getTareaUsuario() {
-        return tareaUsuario;
-    }
-
-    public void setTareaUsuario(String tareaUsuario) {
-        this.tareaUsuario = tareaUsuario;
-    }
-
     public String getFechaHora() {
         return fechaHora;
     }
+
     public void setFechaHora(String fechaHora) {
         this.fechaHora = fechaHora;
     }
+
+    public void setTipoUsuario(int tipoUsuario) { this.tipoUsuario =tipoUsuario;}
 }

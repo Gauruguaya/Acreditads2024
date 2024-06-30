@@ -142,7 +142,7 @@ public class Acreditaciones_activity extends AppCompatActivity {
                             isQRCodeDetected = true;
                             String rawValue = barcode.getRawValue();
                             handleQRCodeData(rawValue);
-                            break; // Para o processamento de futuros cóigos.
+                            break; // Para o processamento de futuros códigos.
                         }
                     })
                     .addOnFailureListener(Throwable::printStackTrace)
