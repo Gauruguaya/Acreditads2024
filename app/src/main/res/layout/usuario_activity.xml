@@ -50,19 +50,17 @@
         android:gravity="center"
         android:textSize="25dp"/>
 
-    <EditText
-        android:id="@+id/edtTipoUsuario"
+    <Spinner
+        android:id="@+id/spnrTipoUsuario"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:hint="invitado 1/organizador 2/participante 3"
-        android:inputType="number"
-        android:gravity="center"
-        android:textSize="20dp"/>
+        android:layout_marginTop="8dp" />
+
 
     <CheckBox android:id="@+id/checkbox_terminos"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         android:text="Acepto los términos de uso"/>
 
     <TextView android:id="@+id/text_terminos"

@@ -4,7 +4,6 @@ import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
-import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
@@ -13,9 +12,11 @@ import android.os.Bundle;
 import android.provider.Settings;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -31,7 +32,8 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
 public class Usuario_activity extends AppCompatActivity {
-    private EditText edtNombreUsuario, edtApellidoUsuario, edtDocUsuario, edtEmailUsuario, edtTipoUsuario;
+    private EditText edtNombreUsuario, edtApellidoUsuario, edtDocUsuario, edtEmailUsuario;
+    private Spinner spnrTipoUsuario;
     private Database db;
     private Button btnRegistro, btnVolver;
 
@@ -53,11 +55,20 @@ public class Usuario_activity extends AppCompatActivity {
         requestQueue = Volley.newRequestQueue(this);
 
         edtDocUsuario = findViewById(R.id.edtDocUsuario);
-        edtTipoUsuario = findViewById(R.id.edtTipoUsuario);
         edtEmailUsuario = findViewById(R.id.edtEmailUsuario);
         edtNombreUsuario = findViewById(R.id.edtNombreUsuario);
         edtApellidoUsuario = findViewById(R.id.edtApellidoUsuario);
         checkboxTerminos = findViewById(R.id.checkbox_terminos);
+
+        spnrTipoUsuario = findViewById(R.id.spnrTipoUsuario);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
+                this,
+                R.array.tipo_usuario,
+                R.layout.spinner_item_tipo_usuario
+        );
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spnrTipoUsuario.setAdapter(adapter);
+
 
         db = new Database(getApplicationContext());
 
@@ -85,7 +96,7 @@ public class Usuario_activity extends AppCompatActivity {
                 u.setApellidoUsuario(edtApellidoUsuario.getText().toString());
                 u.setDocUsuario(edtDocUsuario.getText().toString());
                 u.setEmailUsuario(edtEmailUsuario.getText().toString());
-                u.setTipoUsuario(Integer.parseInt(edtTipoUsuario.getText().toString()));
+                u.setTipoUsuario(spnrTipoUsuario.getSelectedItemPosition()+1);
 
                 // Google Sheets URL
                 String urlSheets = "https://script.google.com/macros/s/AKfycbyQyPbRkjrPCyy8mLro7-yrRdFxVR5Tgzt7liTI2JrVx53enlPlbFtxvDXQLLfCliId/exec?action=inserir&nome="
@@ -93,7 +104,7 @@ public class Usuario_activity extends AppCompatActivity {
                         + "&sobrenome=" + edtApellidoUsuario.getText().toString()
                         + "&documento=" + edtDocUsuario.getText().toString()
                         + "&email=" + edtEmailUsuario.getText().toString()
-                        + "&tipoUsuario=" + edtTipoUsuario.getText().toString()
+                        + "&tipoUsuario=" + u.getTipoUsuario()
                         + "&idInstalacion=" + idInstalacion;
 
 

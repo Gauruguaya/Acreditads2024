@@ -5,4 +5,10 @@
     <string name="asistentes">asistentes</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string-array name="tipo_usuario">
+        <item>Invitado</item>
+        <item>Organizador</item>
+        <item>Participante</item>
+    </string-array>
 </resources>
