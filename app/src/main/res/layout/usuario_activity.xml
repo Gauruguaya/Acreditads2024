@@ -60,6 +60,18 @@
         android:gravity="center"
         android:textSize="20dp"/>
 
+    <CheckBox android:id="@+id/checkbox_terminos"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Acepto los términos de uso"/>
+
+    <TextView android:id="@+id/text_terminos"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=" Términos de Uso"
+        android:textColor="@android:color/holo_blue_dark"
+        android:autoLink="web"/>
+
     <Button
         android:id="@+id/btnRegistro"
         android:layout_width="328dp"
@@ -81,6 +93,5 @@
         android:paddingHorizontal="75dp"
         android:textColorHint="@color/white"
         android:textSize="30dp" />
-
 
 </LinearLayout>

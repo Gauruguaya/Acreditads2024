@@ -9,20 +9,10 @@ import android.widget.EditText;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class AccesoAdministradores extends AppCompatActivity {
-    private String claveAdm;//no sé si esta variable es necesaria aquí
     private String tareaOrg;
 
-    public AccesoAdministradores(String claveAdm, String tareaUsuario) {
-        this.claveAdm = claveAdm;
+    public AccesoAdministradores(String tareaUsuario) {
         this.tareaOrg = tareaOrg;
-    }
-
-    public String getClaveAdm() {
-        return claveAdm;
-    }
-
-    public void setClaveAdm(String claveAdm) {
-        this.claveAdm = claveAdm;
     }
 
     public String getTareaOrg() {

@@ -2,55 +2,62 @@ package com.example.acreditads2023;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
-import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 import androidx.core.content.ContextCompat;
+
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
 public class Usuario_activity extends AppCompatActivity {
-
-    private EditText edtNombreUsuario;
-    private EditText edtApellidoUsuario;
-    private EditText edtDocUsuario;
-    private EditText edtEmailUsuario;
-    private EditText edtTipoUsuario;
+    private EditText edtNombreUsuario, edtApellidoUsuario, edtDocUsuario, edtEmailUsuario, edtTipoUsuario;
     private Database db;
-    private Button btnRegistro;
-    private Button btnVolver;
-    private String idPlanilha = "1g6dIJTiR-4eIzbnwKUK6sXDjC6GYMCRElsbr_bVxPDQ";
-    private String idInstalacion;
+    private Button btnRegistro, btnVolver;
+
+    private CheckBox checkboxTerminos;
+    private String idPlanilha = "1g6dIJTiR-4eIzbnwKUK6sXDjC6GYMCRElsbr_bVxPDQ", idInstalacion;
     private RequestQueue requestQueue;
     private static final int PERMISSION_REQUEST_CODE = 1;
 
+    private static final String CHANNEL_ID = "canal";
+
+    private static final int REQUEST_NOTIFICATION_PERMISSION = 1;
+
+    private boolean usuarioCreado = false;
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.usuario_activity);
         requestQueue = Volley.newRequestQueue(this);
-        btnRegistro = findViewById(R.id.btnRegistro);
-        btnVolver = findViewById(R.id.btnVolver);
+
+        edtDocUsuario = findViewById(R.id.edtDocUsuario);
+        edtTipoUsuario = findViewById(R.id.edtTipoUsuario);
+        edtEmailUsuario = findViewById(R.id.edtEmailUsuario);
         edtNombreUsuario = findViewById(R.id.edtNombreUsuario);
         edtApellidoUsuario = findViewById(R.id.edtApellidoUsuario);
-        edtDocUsuario = findViewById(R.id.edtDocUsuario);
-        edtEmailUsuario = findViewById(R.id.edtEmailUsuario);
-        edtTipoUsuario = findViewById(R.id.edtTipoUsuario);
+        checkboxTerminos = findViewById(R.id.checkbox_terminos);
 
         db = new Database(getApplicationContext());
 
@@ -64,9 +71,15 @@ public class Usuario_activity extends AppCompatActivity {
             }
         }
 
+        btnRegistro = findViewById(R.id.btnRegistro);
         btnRegistro.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (!checkboxTerminos.isChecked()) {
+                    // Mostrar mensaje si no se aceptan los términos y condiciones
+                    Toast.makeText(getApplicationContext(), "Debe aceptar los términos y condiciones", Toast.LENGTH_LONG).show();
+                    return;
+                }
                 Usuario u = new Usuario();
                 u.setNombreUsuario(edtNombreUsuario.getText().toString());
                 u.setApellidoUsuario(edtApellidoUsuario.getText().toString());
@@ -75,54 +88,150 @@ public class Usuario_activity extends AppCompatActivity {
                 u.setTipoUsuario(Integer.parseInt(edtTipoUsuario.getText().toString()));
 
                 // Google Sheets URL
-                String urlSheets = "https://script.google.com/macros/s/AKfycbyQyPbRkjrPCyy8mLro7-yrRdFxVR5Tgzt7liTI2JrVx53enlPlbFtxvDXQLLfCliId/exec?action=inserir&nome=" +
-                        edtNombreUsuario.getText().toString() + "&sobrenome=" + edtApellidoUsuario.getText().toString() +
-                        "&documento=" + edtDocUsuario.getText().toString() + "&email=" + edtEmailUsuario.getText().toString() + "&tipoUsuario=" + edtTipoUsuario.getText().toString() + "&idInstalacion=" + idInstalacion;
+                String urlSheets = "https://script.google.com/macros/s/AKfycbyQyPbRkjrPCyy8mLro7-yrRdFxVR5Tgzt7liTI2JrVx53enlPlbFtxvDXQLLfCliId/exec?action=inserir&nome="
+                        + edtNombreUsuario.getText().toString()
+                        + "&sobrenome=" + edtApellidoUsuario.getText().toString()
+                        + "&documento=" + edtDocUsuario.getText().toString()
+                        + "&email=" + edtEmailUsuario.getText().toString()
+                        + "&tipoUsuario=" + edtTipoUsuario.getText().toString()
+                        + "&idInstalacion=" + idInstalacion;
+
 
                 StringRequest stringRequest = new StringRequest(Request.Method.GET, urlSheets, new com.android.volley.Response.Listener<String>() {
                     @Override
                     public void onResponse(String s) {
                         Log.i("Response", s);
+                        Toast.makeText(getApplicationContext(), "Usuario creado con exito", Toast.LENGTH_SHORT).show();
+                        usuarioCreado = true;
                     }
                 }, new com.android.volley.Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(com.android.volley.VolleyError error) {
                         Log.e("Error", error.toString());
+                        usuarioCreado = false;
                     }
                 });
+                if(usuarioCreado == true)
+                    verificarPermisoNotificaciones();
+                else
+                    Toast.makeText(getApplicationContext(), "Error en la notificacion", Toast.LENGTH_SHORT).show();
                 requestQueue.add(stringRequest);
             }
         });
 
+        btnVolver = findViewById(R.id.btnVolver);
         btnVolver.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                Intent intent = new Intent(Usuario_activity.this, MainActivity.class);
                 startActivity(intent);
             }
         });
     }
 
-    @SuppressLint("HardwareIds")
-    private void initializeIdInstalacion() {
-        TelephonyManager telephonyManager = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_PHONE_STATE) == PackageManager.PERMISSION_GRANTED) {
-            if (telephonyManager != null) {
-                idInstalacion = telephonyManager.getDeviceId();
+    //private void VerificacionDeUsuarioCreado(){
+    //vaya a la sheet
+
+    //si se encuentra el usuario
+    //notificacion usuario creado
+    //  cedulaAux = edtDocUsuario.getText().toString();
+    //     if(cedulaAux.equals(/varible de Fabricio/)){
+    //         verificarPermisoNotificaciones();
+    //     }else{
+    //         Toast.makeText(getApplicationContext(), "Error al crear Usuario! ", Toast.LENGTH_LONG).show();
+    //     }
+    //sino notoficacion error
+    //     verificarPermisoNotificaciones();
+    // }
+
+    private void verificarPermisoNotificaciones() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            // Verificar si el permiso de notificación está concedido
+            if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
+                // Solicitar permiso de notificación
+                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.POST_NOTIFICATIONS}, REQUEST_NOTIFICATION_PERMISSION);
+            } else {
+                // Permiso ya concedido
+                configurarCanalNotificacion();
+                enviarNotificacion();
             }
+        } else {
+            // No es necesario solicitar permisos en versiones anteriores a Android 13
+            configurarCanalNotificacion();
+            enviarNotificacion();
         }
     }
 
+    private void configurarCanalNotificacion() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            NotificationChannel channel = new NotificationChannel(CHANNEL_ID,
+                    "Canal de notificaciones", NotificationManager.IMPORTANCE_DEFAULT);
+            // Configurar otras propiedades del canal, si es necesario
+            NotificationManager manager = getSystemService(NotificationManager.class);
+            manager.createNotificationChannel(channel);
+        }
+    }
+
+    private void enviarNotificacion() {
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(this, CHANNEL_ID)
+                .setSmallIcon(R.drawable.ic_notification) // Icono de la notificación
+                .setContentTitle("Creacion de Usuario")
+                .setContentText("Usuario creado con exito!")
+                .setPriority(NotificationCompat.PRIORITY_DEFAULT);
+
+        NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            return;
+        }
+        notificationManager.notify(1, builder.build());
+    }
+
+    @SuppressLint("HardwareIds")
+    private void initializeIdInstalacion() {
+        // Ya no usamos getDeviceId() porque requiere READ_PRIVILEGED_PHONE_STATE
+        // Utilizamos ANDROID_ID como una alternativa menos privilegiada
+        idInstalacion = Settings.Secure.getString(getContentResolver(), Settings.Secure.ANDROID_ID);
+    }
+
+
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);  // Asegúrate de llamar a la superclase
         if (requestCode == PERMISSION_REQUEST_CODE) {
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 initializeIdInstalacion();
             } else {
                 Toast.makeText(this, "Permission denied to read phone state", Toast.LENGTH_SHORT).show();
-                idInstalacion = "PermissionDenied";
+                idInstalacion = Settings.Secure.getString(getContentResolver(), Settings.Secure.ANDROID_ID);
             }
         }
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == REQUEST_NOTIFICATION_PERMISSION) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                // Permiso concedido, configurar el canal de notificación
+                configurarCanalNotificacion();
+                enviarNotificacion();
+            } else {
+                // Permiso denegado
+                Toast.makeText(getApplicationContext(), "Permiso denegado", Toast.LENGTH_SHORT).show();
+
+            }
+        }
+    }
+
+    private void descargarPDF() {
+        // URL del PDF para descargar
+        String urlPDF = "https://drive.google.com/file/d/178com7W9Ct-O2i3kSdeBHNHrtFdOOHvo/view";
+
+        // Crear un Intent para abrir el navegador y descargar el PDF desde la URL
+        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(urlPDF));
+        startActivity(intent);
     }
 }

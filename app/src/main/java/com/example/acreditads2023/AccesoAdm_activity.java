@@ -32,6 +32,8 @@ public class AccesoAdm_activity extends AppCompatActivity {
     private Button btnVolver;
     private static final String CHANNEL_ID = "canal";
     private static final int REQUEST_NOTIFICATION_PERMISSION = 1;
+    private AccesoAdministradoresDAO guardarTarea;
+    private Database db;
 
     private RequestQueue requestQueue;
 
@@ -52,6 +54,8 @@ public class AccesoAdm_activity extends AppCompatActivity {
             public void onClick(View v) {
                 String claveAdm = edtClaveAdm.getText().toString();
                 String tareaOrg = edtTareaOrg.getText().toString();
+                guardarTarea = new AccesoAdministradoresDAO(db);
+                guardarTarea.salvar(new AccesoAdministradores(tareaOrg));
 
                 // URL para verificar la clave en Google Sheets
                 String urlVerificarClave = "https://script.google.com/macros/s/AKfycbxX1EInivW85EH1IGNZzh6bWJTLm6K9-ZRr3-wduHYFd34d1SW0dG2bAndm8CZvYPE/exec?action=verificarClave&clave=" + claveAdm;
