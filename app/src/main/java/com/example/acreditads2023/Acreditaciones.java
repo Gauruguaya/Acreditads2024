@@ -6,8 +6,7 @@ public class Acreditaciones {
     private int idInstalacion;
     private int idUsuario;
     private String timeStamp;
-    private String lecturaQR = "";
-
+    private String TxQrCodeResult = "";
 
     public Acreditaciones(){
 
@@ -16,7 +15,7 @@ public class Acreditaciones {
         this.idInstalacion = idInstalacion;
         this.idUsuario = idUsuario;
         this.timeStamp = timeStamp;
-        this.lecturaQR = lecturaQR;
+        this.TxQrCodeResult = TxQrCodeResult;
     }
 
     public int getIdInstalacion() {
@@ -43,11 +42,11 @@ public class Acreditaciones {
         this.timeStamp = timeStamp;
     }
 
-    public String getLecturaQR() {
-        return lecturaQR;
+    public String getTxQrCodeResult() {
+        return TxQrCodeResult;
     }
 
-    public void setLecturaQR(String lecturaQR) {
-        this.lecturaQR = lecturaQR;
+    public void setTxQrCodeResult(String TxQrCodeResult) {
+        this.TxQrCodeResult = TxQrCodeResult;
     }
 }

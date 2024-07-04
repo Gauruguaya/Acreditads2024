@@ -7,6 +7,7 @@ import android.app.NotificationManager;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
+import android.net.http.UrlRequest;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
@@ -17,6 +18,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -36,6 +38,7 @@ public class Usuario_activity extends AppCompatActivity {
     private Spinner spnrTipoUsuario;
     private Database db;
     private Button btnRegistro, btnVolver;
+    private TextView text_terminos;
 
     private CheckBox checkboxTerminos;
     private String idPlanilha = "1g6dIJTiR-4eIzbnwKUK6sXDjC6GYMCRElsbr_bVxPDQ", idInstalacion;
@@ -59,6 +62,14 @@ public class Usuario_activity extends AppCompatActivity {
         edtNombreUsuario = findViewById(R.id.edtNombreUsuario);
         edtApellidoUsuario = findViewById(R.id.edtApellidoUsuario);
         checkboxTerminos = findViewById(R.id.checkbox_terminos);
+        text_terminos = findViewById(R.id.text_terminos);
+
+        text_terminos.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                descargarPDF();
+            }
+        });
 
         spnrTipoUsuario = findViewById(R.id.spnrTipoUsuario);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
@@ -68,6 +79,7 @@ public class Usuario_activity extends AppCompatActivity {
         );
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spnrTipoUsuario.setAdapter(adapter);
+
 
 
         db = new Database(getApplicationContext());
@@ -239,7 +251,8 @@ public class Usuario_activity extends AppCompatActivity {
 
     private void descargarPDF() {
         // URL del PDF para descargar
-        String urlPDF = "https://drive.google.com/file/d/178com7W9Ct-O2i3kSdeBHNHrtFdOOHvo/view";
+        //String urlPDF = "https://drive.google.com/file/d/178com7W9Ct-O2i3kSdeBHNHrtFdOOHvo/view";
+        String urlPDF = "https://drive.google.com/uc?export=download&id=178com7W9Ct-O2i3kSdeBHNHrtFdOOHvo";
 
         // Crear un Intent para abrir el navegador y descargar el PDF desde la URL
         Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(urlPDF));

@@ -20,7 +20,7 @@ public class AcreditacionesDAO {
             ContentValues values = new ContentValues();
             //values.put(("idInstalacion", a.getIdInstalacion());
             values.put("idUsuario", a.getIdUsuario());
-            values.put("lecturaQR",a.getLecturaQR());
+            values.put("lecturaQR",a.getTxQrCodeResult());
             values.put("timeStamp", a.getTimeStamp());
 
             //idInstalacion = db2.insert("Acreditaciones", null, values);
@@ -42,8 +42,9 @@ public class AcreditacionesDAO {
                     Acreditaciones a = new Acreditaciones();
                     a.setIdInstalacion(c.getInt(c.getColumnIndex("idInstalación")));
                     a.setIdUsuario(c.getInt(c.getColumnIndex("idUsuario")));
-                    a.setLecturaQR(c.getString(c.getColumnIndex("autorEvento")));
+                    a.setTxQrCodeResult(c.getString(c.getColumnIndex("autorEvento")));
                     a.setTimeStamp(c.getString(c.getColumnIndex("timeStamp")));
+                    //debe tomar las lecturas de eventos que tienen dos horarios distintos
                     todos.add(a);
                 }while (c.moveToNext());
             }
@@ -55,33 +56,4 @@ public class AcreditacionesDAO {
         }
         return todos;
     }
-
-    public List<Evento> buscarUsuario(int idInstBuscada){
-        List<Evento> usuario = new ArrayList<>();
-        SQLiteDatabase db2 = db.getReadableDatabase();
-        Cursor u = null;
-        try{
-            u = db2.rawQuery("select e.tituloEvento FROM Evento e INNER JOIN Acreditaciones a ON+" +
-                    "e.idEvento = a.idEvento INNER JOIN Usuario u ON a.idUsuario = u.idUsuario WHERE+" +
-                    " u.idInstalacion ="+idInstBuscada, null);
-            if (u.moveToFirst()){
-                do {
-                    Evento au = new Evento();
-                    int idInstalacionIndex = u.getColumnIndex("idInstalación");
-                    if (idInstalacionIndex != -1) {
-                   //     au.setIdInstalacion(u.getInt(idInstalacionIndex));
-                    }
-                 //   au.setTituloEvento(u.getString(u.getColumnIndex("tituloEvento")));
-                    usuario.add(au);
-                }while (u.moveToNext());
-            }
-        }
-        catch (Exception ex){
-            ex.printStackTrace();
-        }finally {
-            u.close();
-        }
-        return usuario;
-    }
-
 }

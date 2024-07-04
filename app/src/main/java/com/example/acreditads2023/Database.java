@@ -24,7 +24,8 @@ public class Database extends SQLiteOpenHelper {
                 "tipoEvento integer, fechaHoraEvento text, idAdminEvento integer);");
         db.execSQL("create table if not exists Acreditaciones(idUsuario integer NOT NULL," +
                 "idInstalacion integer NOT NULL, idEvento integer NOT NULL, timeStamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP," +
-                "FOREIGN KEY(idInstalacion) REFERENCES Usuario(idInstalacion), FOREIGN KEY (idEvento) REFERENCES Evento(idEvento))");
+                "txQrCodeResult TEXT, " + "FOREIGN KEY(idInstalacion) REFERENCES Usuario(idInstalacion),"+
+                " FOREIGN KEY (idEvento) REFERENCES Evento(idEvento))");
     }
 
     @Override

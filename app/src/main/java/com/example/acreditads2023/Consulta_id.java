@@ -23,31 +23,15 @@ public class Consulta_id extends AppCompatActivity {
         super.onCreate(savedInstanceStare);
         setContentView(R.layout.activity_consulta_id);
 
-    /*protected void onCreate(Bundle savedInstanceStare) {
-        super.onCreate(savedInstanceStare);
-        setContentView(R.layout.activity_consulta_id);
-        part = new Participantes();
-    }
+        db = new Database(getApplicationContext());
+        //el usuario consulta su actividad en la base de datos local SQLite
+        //la lista debe contener los eventos que registren la misma lectura QR en dos horarios distintos
+       /* int idUsuario = obtenerIdUsuario();
+        List<String> miActividad = consultarMiActividad(idUsuario);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, miActividad);
+        ListView lvMiActividad = findViewById(R.id.lvMiActividad);
+        lvMiActividad.setAdapter(adapter);*/
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-
-        db = new Database(view.getContext());
-        UsuarioDAO uDAO =new UsuarioDAO(db);
-
-
-
-        String[] array = new String[participantes.size()];
-        for(int i=0;i<participantes.size();i++){
-            array[i] = participantes.get(i).getIdUsuario()+" "+participantes.get(i).getNombreUsuario()+" "+participantes.get(i).getApellidoUsuario()+"\n";
-        }
-        final ArrayAdapter<String> adapter = new ArrayAdapter<String>(view.getContext(), android.R.layout.simple_list_item_1, array);
-
-        lvPart.setAdapter(adapter);
-        return view;
-    }
-*/
         btnVolver = findViewById(R.id.btnVolver);
         btnVolver.setOnClickListener(new View.OnClickListener() {
             @Override

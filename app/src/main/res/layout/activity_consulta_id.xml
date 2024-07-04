@@ -26,7 +26,7 @@
                 android:textSize="34sp" />
 
             <ListView
-                android:id="@+id/lvParticipantes"
+                android:id="@+id/lvMiActividad"
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"/>
 
