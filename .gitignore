@@ -13,3 +13,6 @@
 .externalNativeBuild
 .cxx
 local.properties
+build.gradle.kts
+.idea/studiobot.xml
+.idea/studiobot.xml
