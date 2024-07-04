@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -32,6 +33,9 @@ public class Evento_activity extends AppCompatActivity {
     private static final String CHANNEL_ID = "canal";
     private static final int REQUEST_NOTIFICATION_PERMISSION = 1;
     private EditText edtTituloEvento,edtAutorEvento,edtTipoEvento,edtFechaHoraEvento,edtIdAdminEvento;
+    private TextView latitudView;
+    private TextView longitudView;
+
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -46,6 +50,8 @@ public class Evento_activity extends AppCompatActivity {
         edtAutorEvento = findViewById(R.id.edtAutorEvento);
         edtIdAdminEvento = findViewById(R.id.edtIdAdminEvento);
         edtFechaHoraEvento = findViewById(R.id.edtFechaHoraEvento);
+        latitudView = findViewById(R.id.tvLatitud);
+        longitudView = findViewById(R.id.tvLongitud);
 
         db = new Database(getApplicationContext());
 
@@ -64,6 +70,7 @@ public class Evento_activity extends AppCompatActivity {
 
                 // Llamar al método verificarPermisoNotificaciones() después de que el usuario se registre con éxito
                 verificarPermisoNotificaciones();
+
 
                 // Google Sheets URL
                 //Eu preciso puxar as variáveis aqui
@@ -122,6 +129,8 @@ public class Evento_activity extends AppCompatActivity {
             // VARIABLES QUE CONTIENEN EL VALOR DEL EVENTO
             latitud = LatitudAux;
             longitud = LongitudAux;
+            latitudView.setText(latitud);
+            longitudView.setText(longitud);
         }
     }
 
