@@ -68,8 +68,35 @@ public class AccesoAdm_activity extends AppCompatActivity {
                 String claveAdm = edtClaveAdm.getText().toString();
                 String tareaOrg = edtTareaOrg.getText().toString();
 
+                Log.d("Clave pega", claveAdm);
+
+                if (tareaOrg != null) {
+                    // URL para guardar la tarea en Google Sheets
+                    String urlGuardarTarea = "https://script.google.com/macros/s/AKfycbwRHeHUHMtCXLe-iyzuVj6MXrxaW-zl5-Q-g8h_yHWYAm8KI9jDwaKcFINKpyX-eA/exec?action=guardarTarea&tarea=" + tareaOrg + "&idInstalacion=" + idInstalacion;
+                    StringRequest guardarTareaRequest = new StringRequest(Request.Method.GET, urlGuardarTarea, new Response.Listener<String>() {
+                        @Override
+                        public void onResponse(String response) {
+                            if (response.trim().equals("EXITO")) {
+                                Toast.makeText(AccesoAdm_activity.this, "Tarea guardada exitosamente", Toast.LENGTH_SHORT).show();
+                                verificarPermisoNotificaciones();
+                            } else {
+                                Toast.makeText(AccesoAdm_activity.this, "Error al guardar la tarea", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    }, new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            Log.e("Error", "Erro ao guardar a tarefa: " + error.toString());
+                            Toast.makeText(AccesoAdm_activity.this, "Error al guardar la tarea", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+
+                    requestQueue.add(guardarTareaRequest);
+                }
+
                 // URL para verificar la clave en Google Sheets
-                String urlVerificarClave = "https://script.google.com/macros/s/AKfycbwRHeHUHMtCXLe-iyzuVj6MXrxaW-zl5-Q-g8h_yHWYAm8KI9jDwaKcFINKpyX-eA/exec?action=verificarClave&clave=" + claveAdm;
+                String urlVerificarClave = "https://script.google.com/macros/s/AKfycbwXHk8xtcQgeb_1uLDEyLCmt9lb5Mi-wFQWFrQWPu-JgBhBGcVGboHkj0VR_YNS3bNo/exec?action=verificarClave&clave=" + claveAdm;
+                Log.d("Url completa", urlVerificarClave);
 
                 StringRequest verificarClaveRequest = new StringRequest(Request.Method.GET, urlVerificarClave, new Response.Listener<String>() {
                     @Override
@@ -78,7 +105,7 @@ public class AccesoAdm_activity extends AppCompatActivity {
                         Log.d("Resposta do Script", "Resposta recebida: " + response);
 
                         // Garantir que a resposta não contenha espaços em branco extras
-                        if (response.trim().equalsIgnoreCase("true")) {
+                        if (response.trim().equals("true")) {
                             // Se a clave é válida, prosseguir com a tarefa
                             Intent intent = new Intent(getApplicationContext(), Evento_activity.class);
                             startActivity(intent);
@@ -96,28 +123,6 @@ public class AccesoAdm_activity extends AppCompatActivity {
                 });
 
                 requestQueue.add(verificarClaveRequest);
-
-                // URL para guardar la tarea en Google Sheets
-                String urlGuardarTarea = "https://script.google.com/macros/s/AKfycbxX1EInivW85EH1IGNZzh6bWJTLm6K9-ZRr3-wduHYFd34d1SW0dG2bAndm8CZvYPE/exec?action=guardarTarea&tarea=" + tareaOrg + "&idInstalacion=" + idInstalacion;
-                StringRequest guardarTareaRequest = new StringRequest(Request.Method.GET, urlGuardarTarea, new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        if (response.trim().equals("EXITO")) {
-                            Toast.makeText(AccesoAdm_activity.this, "Tarea guardada exitosamente", Toast.LENGTH_SHORT).show();
-                            verificarPermisoNotificaciones();
-                        } else {
-                            Toast.makeText(AccesoAdm_activity.this, "Error al guardar la tarea", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                }, new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Log.e("Error", "Erro ao guardar a tarefa: " + error.toString());
-                        Toast.makeText(AccesoAdm_activity.this, "Error al guardar la tarea", Toast.LENGTH_SHORT).show();
-                    }
-                });
-
-                requestQueue.add(guardarTareaRequest);
             }
         });
 
