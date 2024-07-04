@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:padding="16dp"
     tools:context=".Consulta_id">
 
     <ScrollView
@@ -16,6 +17,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/cardview_compat_inset_shadow"
             android:orientation="vertical">
+
             <TextView
                 android:id="@+id/tviewMiActividad"
                 android:layout_width="match_parent"
@@ -27,7 +29,7 @@
 
             <ListView
                 android:id="@+id/lvMiActividad"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_width="wrap_content"/>
 
             <Button

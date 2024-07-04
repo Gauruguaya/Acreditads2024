@@ -80,8 +80,6 @@ public class Usuario_activity extends AppCompatActivity {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spnrTipoUsuario.setAdapter(adapter);
 
-
-
         db = new Database(getApplicationContext());
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
