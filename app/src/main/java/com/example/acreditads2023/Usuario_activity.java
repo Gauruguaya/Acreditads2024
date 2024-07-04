@@ -111,11 +111,11 @@ public class Usuario_activity extends AppCompatActivity {
                 u.setTipoUsuario(spnrTipoUsuario.getSelectedItemPosition()+1);
 
                 // Google Sheets URL
-                String urlSheets = "https://script.google.com/macros/s/AKfycbyQyPbRkjrPCyy8mLro7-yrRdFxVR5Tgzt7liTI2JrVx53enlPlbFtxvDXQLLfCliId/exec?action=inserir&nome="
-                        + edtNombreUsuario.getText().toString()
-                        + "&sobrenome=" + edtApellidoUsuario.getText().toString()
-                        + "&documento=" + edtDocUsuario.getText().toString()
-                        + "&email=" + edtEmailUsuario.getText().toString()
+                String urlSheets = "https://script.google.com/macros/s/AKfycbyQyPbRkjrPCyy8mLro7-yrRdFxVR5Tgzt7liTI2JrVx53enlPlbFtxvDXQLLfCliId/exec?action=inserir"
+                        + "&nome=" + u.getNombreUsuario()
+                        + "&sobrenome=" + u.getApellidoUsuario()
+                        + "&documento=" + u.getDocUsuario()
+                        + "&email=" + u.getEmailUsuario()
                         + "&tipoUsuario=" + u.getTipoUsuario()
                         + "&idInstalacion=" + idInstalacion;
 
