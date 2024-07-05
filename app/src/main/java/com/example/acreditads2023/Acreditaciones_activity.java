@@ -36,7 +36,7 @@ public class Acreditaciones_activity extends AppCompatActivity {
     private PreviewView previewView;
     private ExecutorService cameraExecutor;
     private boolean isQRCodeDetected = false;
-    private Button btnVolver;
+    private Button btnAgregar, btnVolver;
     private View view;
     private TextView txQrCodeResult;
     private ProcessCameraProvider cameraProvider;
@@ -60,6 +60,7 @@ public class Acreditaciones_activity extends AppCompatActivity {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA}, 101);
         }
 
+        btnAgregar = findViewById(R.id.btnAgregar);
         btnVolver = findViewById(R.id.btnVolver);
 
         btnVolver = findViewById(R.id.btnVolver);
@@ -149,6 +150,7 @@ public class Acreditaciones_activity extends AppCompatActivity {
                             a.setTimeStamp(LocalDateTime.now().toString());
                             aDAO.salvar(a);
                             handleQRCodeData(rawValue);
+                            btnAgregar.setVisibility(View.VISIBLE);
                             break; // Para o processamento de futuros códigos.
                         }
                     })
