@@ -16,3 +16,5 @@ local.properties
 build.gradle.kts
 .idea/studiobot.xml
 .idea/studiobot.xml
+.idea/misc.xml
+.idea/gradle.xml
