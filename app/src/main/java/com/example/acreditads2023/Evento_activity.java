@@ -74,7 +74,7 @@ public class Evento_activity extends AppCompatActivity {
 
                 // Google Sheets URL
                 //Eu preciso puxar as variáveis aqui
-                String urlSheets = "https://script.google.com/macros/s/AKfycbxX1EInivW85EH1IGNZzh6bWJTLm6K9-ZRr3-wduHYFd34d1SW0dG2bAndm8CZvYPE/exec?action=evento&tituloEvento=" +
+                String urlSheets = "https://script.google.com/macros/s/AKfycbwYDDtE4okyKpEZ5y1ZmhwJzOqP8FXTCEvjRVTxk846eRw0Ud1RqlgYKlKeIFf9S3KE/exec?action=evento&tituloEvento=" +
                         edtTituloEvento.getText().toString() + "&autorEvento=" + edtAutorEvento.getText().toString() +
                         "&tipoEvento=" + edtTipoEvento.getText().toString() + "&fechaHoraEvento=" + edtFechaHoraEvento.getText().toString() + "&latitud=" + latitud + "&longitud=" + longitud;
 
