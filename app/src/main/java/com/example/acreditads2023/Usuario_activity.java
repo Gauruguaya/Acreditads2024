@@ -4,6 +4,7 @@ import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
@@ -34,6 +35,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
 public class Usuario_activity extends AppCompatActivity {
+    private ProgressDialog progressDialog;
     private EditText edtNombreUsuario, edtApellidoUsuario, edtDocUsuario, edtEmailUsuario;
     private Spinner spnrTipoUsuario;
     private Database db;
@@ -118,24 +120,23 @@ public class Usuario_activity extends AppCompatActivity {
                         + "&idInstalacion=" + idInstalacion;
 
 
+                showBlockingDialog("Executando...");
+
                 StringRequest stringRequest = new StringRequest(Request.Method.GET, urlSheets, new com.android.volley.Response.Listener<String>() {
                     @Override
                     public void onResponse(String s) {
-                        Log.i("Response", s);
-                        Toast.makeText(getApplicationContext(), "Usuario creado con exito", Toast.LENGTH_SHORT).show();
-                        usuarioCreado = true;
+                        // Procesar la respuesta del servidor
+                        dismissBlockingDialog();
+                        retCriarUsuario(s);
                     }
                 }, new com.android.volley.Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(com.android.volley.VolleyError error) {
+                        dismissBlockingDialog();
                         Log.e("Error", error.toString());
-                        usuarioCreado = false;
+                        Toast.makeText(getApplicationContext(), "Error al crear Usuario!", Toast.LENGTH_SHORT).show();
                     }
                 });
-                if(usuarioCreado == true)
-                    verificarPermisoNotificaciones();
-                else
-                    Toast.makeText(getApplicationContext(), "Error en la notificacion", Toast.LENGTH_SHORT).show();
                 requestQueue.add(stringRequest);
             }
         });
@@ -148,6 +149,14 @@ public class Usuario_activity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+
+    public void retCriarUsuario(String s){
+        btnRegistro.setVisibility(View.INVISIBLE);
+        verificarPermisoNotificaciones();
+        Log.i("Response", s);
+        Toast.makeText(getApplicationContext(), "Usuario creado con exito", Toast.LENGTH_SHORT).show();
+        usuarioCreado = true;
     }
 
     //private void VerificacionDeUsuarioCreado(){
@@ -256,4 +265,22 @@ public class Usuario_activity extends AppCompatActivity {
         Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(urlPDF));
         startActivity(intent);
     }
+
+    protected void showBlockingDialog(String message) {
+
+        dismissBlockingDialog();
+        progressDialog = new ProgressDialog(this, ProgressDialog.THEME_DEVICE_DEFAULT_DARK);
+        progressDialog.setCancelable(false);
+        progressDialog.setMessage(message);
+        progressDialog.show();
+    }
+
+    protected void dismissBlockingDialog() {
+
+        if (progressDialog != null) {
+            progressDialog.dismiss();
+            progressDialog = null;
+        }
+    }
+
 }
