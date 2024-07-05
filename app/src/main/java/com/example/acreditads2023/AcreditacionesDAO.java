@@ -9,46 +9,43 @@ import java.util.List;
 
 public class AcreditacionesDAO {
     private final Database db;
-    private int idInstalacion;
+    int idUsuario;
     public AcreditacionesDAO(Database db){
         this.db = db;
     }
-    public int salvar(Acreditaciones a){
+    public void salvar(Acreditaciones a){
 
         SQLiteDatabase db2 = db.getWritableDatabase();
         try{
             ContentValues values = new ContentValues();
             values.put("lecturaQR",a.getTxQrCodeResult());
             values.put("timeStamp", a.getTimeStamp());
-
-            //idInstalacion = db2.insert("Acreditaciones", null, values);
         }
         catch (Exception ex){
             ex.printStackTrace();
         }
-        return idInstalacion;
+        return;
     }
     @SuppressLint("Range")
-    public List<Acreditaciones> buscarTodos(){
+    public List<Acreditaciones> buscarAcreditaciones(){
         List<Acreditaciones> todos = new ArrayList<>();
         SQLiteDatabase db2 = db.getReadableDatabase();
-        Cursor c = null;
-        try{
-            c = db2.rawQuery("select * from Acreditaciones", null);
-            if (c.moveToFirst()){
+        Cursor c = db2.rawQuery("SELECT * FROM Acreditaciones WHERE idUsuario = ?",
+                new String[]{String.valueOf(idUsuario)});
+        try {
+            if (c.moveToFirst()) {
                 do {
-                    Acreditaciones a = new Acreditaciones();
-                    a.setTxQrCodeResult(c.getString(c.getColumnIndex("autorEvento")));
+                    Acreditaciones a = new Acreditaciones();a.setTxQrCodeResult(c.getString(c.getColumnIndex("lecturaQR")));
                     a.setTimeStamp(c.getString(c.getColumnIndex("timeStamp")));
-                    //debe tomar las lecturas de eventos que tienen dos horarios distintos
                     todos.add(a);
-                }while (c.moveToNext());
+                } while (c.moveToNext());
             }
-        }
-        catch (Exception ex){
+        } catch (Exception ex) {
             ex.printStackTrace();
-        }finally {
-            c.close();
+        } finally {
+            if (c != null) {
+                c.close();
+            }
         }
         return todos;
     }
