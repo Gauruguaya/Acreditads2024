@@ -3,6 +3,7 @@ package com.example.acreditads2023;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.location.Location;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -22,6 +23,9 @@ import androidx.camera.lifecycle.ProcessCameraProvider;
 import androidx.camera.view.PreviewView;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.common.util.concurrent.ListenableFuture;
 import com.google.mlkit.vision.barcode.BarcodeScanner;
 import com.google.mlkit.vision.barcode.BarcodeScannerOptions;
@@ -35,13 +39,15 @@ import java.util.concurrent.Executors;
 public class Acreditaciones_activity extends AppCompatActivity {
     private PreviewView previewView;
     private ExecutorService cameraExecutor;
-    private boolean isQRCodeDetected = false;
+    private boolean isQRCodeDetected = false, isInside;
     private Button btnAgregar, btnVolver;
     private View view;
     private TextView txQrCodeResult;
     private ProcessCameraProvider cameraProvider;
-    public String rawValue;
+    public String rawValue, Latitud, Longitud;
     public AcreditacionesDAO aDAO;
+    private double LatitudPersona, LongitudPersona, NumLatitud, NumLongitud;
+    private FusedLocationProviderClient fusedLocationProviderClient;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -61,7 +67,12 @@ public class Acreditaciones_activity extends AppCompatActivity {
         }
 
         btnAgregar = findViewById(R.id.btnAgregar);
-        btnVolver = findViewById(R.id.btnVolver);
+        btnAgregar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getLastLocation();
+            }
+        });
 
         btnVolver = findViewById(R.id.btnVolver);
         btnVolver.setOnClickListener(new View.OnClickListener() {
@@ -194,6 +205,66 @@ public class Acreditaciones_activity extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
         cameraExecutor.shutdown();
+    }
+
+    private void getLastLocation(){
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
+            return;
+        }
+        fusedLocationProviderClient.getLastLocation().addOnCompleteListener(new OnCompleteListener<Location>() {
+            @Override
+            public void onComplete(@NonNull Task<Location> task) {
+                if (task.isSuccessful() && task.getResult() != null) {
+                    Location location = task.getResult();
+                    LatitudPersona = location.getLatitude();
+                    LongitudPersona = location.getLongitude();
+
+                    checkIfInsideArea();
+                } else {
+                    Toast.makeText(Acreditaciones_activity.this, "No se pudo obtener la ubicación", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+    }
+
+    private void checkIfInsideArea() {
+        pushLocalidadEvento();
+
+        try {
+            NumLatitud = Double.parseDouble(Latitud);
+            NumLongitud = Double.parseDouble(Longitud);
+
+            // Conversión de 30 metros a grados
+            double metersToDegrees = 30.0 / 111000.0;
+            double deltaLat = metersToDegrees;
+            double deltaLong = metersToDegrees / Math.cos(Math.toRadians(NumLatitud));
+
+            // Coordenadas límite del área
+            double minLat = NumLatitud - deltaLat;
+            double maxLat = NumLatitud + deltaLat;
+            double minLong = NumLongitud - deltaLong;
+            double maxLong = NumLongitud + deltaLong;
+
+            // Verificación de si la persona está dentro del área
+            if (LatitudPersona >= minLat && LatitudPersona <= maxLat && LongitudPersona >= minLong && LongitudPersona <= maxLong){
+                isInside = true;
+            } else {
+                isInside = false;
+            }
+
+            String message = isInside ? "La persona está dentro del área." : "La persona está fuera del área.";
+            Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
+        } catch (NumberFormatException e) {
+            Toast.makeText(getApplicationContext(), "Error al convertir la latitud o longitud", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private void pushLocalidadEvento(){
+        // Aca debe de estar los valores de la ubicacion del evento los cuales estan en la sheet
+        // y settear los valores a estas dos variables
+        Latitud = "-12.122345";
+        Longitud = "0.000000";
     }
 
 }
