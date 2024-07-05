@@ -38,8 +38,6 @@ public class AcreditacionesDAO {
             if (c.moveToFirst()){
                 do {
                     Acreditaciones a = new Acreditaciones();
-                    a.setIdInstalacion(c.getInt(c.getColumnIndex("idInstalación")));
-                    a.setIdUsuario(c.getInt(c.getColumnIndex("idUsuario")));
                     a.setTxQrCodeResult(c.getString(c.getColumnIndex("autorEvento")));
                     a.setTimeStamp(c.getString(c.getColumnIndex("timeStamp")));
                     //debe tomar las lecturas de eventos que tienen dos horarios distintos
