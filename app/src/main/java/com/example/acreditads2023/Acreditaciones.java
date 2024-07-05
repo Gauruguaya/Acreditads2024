@@ -3,7 +3,6 @@ package com.example.acreditads2023;
 import android.widget.Button;
 
 public class Acreditaciones {
-    private int idInstalacion;
     private int idUsuario;
     private String timeStamp;
     private String TxQrCodeResult = "";
@@ -11,27 +10,9 @@ public class Acreditaciones {
     public Acreditaciones(){
 
     }
-    public Acreditaciones(int idUsuario, String timeStamp, String lecturaQR) {
-        this.idInstalacion = idInstalacion;
-        this.idUsuario = idUsuario;
+    public Acreditaciones(String timeStamp, String TxQrCodeResult) {
         this.timeStamp = timeStamp;
         this.TxQrCodeResult = TxQrCodeResult;
-    }
-
-    public int getIdInstalacion() {
-        return idInstalacion;
-    }
-
-    public void setIdInstalacion(int idInstalacion) {
-        this.idInstalacion = idInstalacion;
-    }
-
-    public int getIdUsuario() {
-        return idUsuario;
-    }
-
-    public void setIdUsuario(int idUsuario) {
-        this.idUsuario = idUsuario;
     }
 
     public String getTimeStamp() {
@@ -49,4 +30,5 @@ public class Acreditaciones {
     public void setTxQrCodeResult(String TxQrCodeResult) {
         this.TxQrCodeResult = TxQrCodeResult;
     }
+
 }

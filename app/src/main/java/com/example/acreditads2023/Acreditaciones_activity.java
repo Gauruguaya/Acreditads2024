@@ -40,6 +40,9 @@ public class Acreditaciones_activity extends AppCompatActivity {
     private View view;
     private TextView txQrCodeResult;
     private ProcessCameraProvider cameraProvider;
+    public String rawValue;
+    public AcreditacionesDAO aDAO;
+
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -140,7 +143,11 @@ public class Acreditaciones_activity extends AppCompatActivity {
                     .addOnSuccessListener(barcodes -> {
                         for (Barcode barcode : barcodes) {
                             isQRCodeDetected = true;
-                            String rawValue = barcode.getRawValue();
+                            rawValue = barcode.getRawValue();
+                            Acreditaciones a = new Acreditaciones();
+                            a.setTxQrCodeResult(rawValue);
+                            a.setTimeStamp(LocalDateTime.now().toString());
+                            aDAO.salvar(a);
                             handleQRCodeData(rawValue);
                             break; // Para o processamento de futuros códigos.
                         }

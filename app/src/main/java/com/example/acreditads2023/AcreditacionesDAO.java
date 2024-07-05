@@ -18,8 +18,6 @@ public class AcreditacionesDAO {
         SQLiteDatabase db2 = db.getWritableDatabase();
         try{
             ContentValues values = new ContentValues();
-            //values.put(("idInstalacion", a.getIdInstalacion());
-            values.put("idUsuario", a.getIdUsuario());
             values.put("lecturaQR",a.getTxQrCodeResult());
             values.put("timeStamp", a.getTimeStamp());
 

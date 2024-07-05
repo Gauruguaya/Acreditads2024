@@ -27,7 +27,7 @@ public class Consulta_id extends AppCompatActivity {
         //el usuario consulta su actividad en la base de datos local SQLite
         //la lista debe contener los eventos que registren la misma lectura QR en dos horarios distintos
        /* int idUsuario = obtenerIdUsuario();
-        List<String> miActividad = consultarMiActividad(idUsuario);
+        List<String> miActividad = consultarMiActividad();
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, miActividad);
         ListView lvMiActividad = findViewById(R.id.lvMiActividad);
         lvMiActividad.setAdapter(adapter);*/
