@@ -196,7 +196,7 @@ public class Acreditaciones_activity extends AppCompatActivity {
         txQrCodeResult.setVisibility(TextView.VISIBLE);
 
         // Google Sheets URL
-        String urlSheets = "https://script.google.com/macros/s/AKfycbyQyPbRkjrPCyy8mLro7-yrRdFxVR5Tgzt7liTI2JrVx53enlPlbFtxvDXQLLfCliId/exec?action=buscarEventoPorCodigo"
+        String urlSheets = "https://script.google.com/macros/s/AKfycbz3wNphwxMkuqRkB1rryK2uhv0QMQkrXhSxWgzFjUraC4I6w2sN3aAwPMISRVLCd04/exec?action=buscarEventoPorCodigo"
                 + "&codigoQr=" + "18";
 
         showBlockingDialog("Executando...");

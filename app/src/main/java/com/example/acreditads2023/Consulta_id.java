@@ -23,10 +23,9 @@ public class Consulta_id extends AppCompatActivity {
         super.onCreate(savedInstanceStare);
         setContentView(R.layout.activity_consulta_id);
 
-        db = new Database(getApplicationContext());
 
-        /*int idUsuario = obtenerIdUsuario();
-        List<String> miActividad = consultarMiActividad(AcreditacionesDAO.buscarAcreditaciones(idUsuario));
+        /*int idUsuario = obtenerIdUsuario(); ¿o es mejor tomar la idInstalación?
+        List<String> miActividad = consultarMiActividad(AcreditacionesDAO.buscarAcreditaciones(id?));
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, miActividad);
         ListView lvMiActividad = findViewById(R.id.lvMiActividad);
         lvMiActividad.setAdapter(adapter);*/
