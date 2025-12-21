@@ -163,9 +163,9 @@ public class UbicarEventoActivity extends AppCompatActivity implements MapView.O
         // Crear nuevo punto geográfico
         GeoPoint nuevaUbicacion = new GeoPoint(latitud, longitud);
         
-        // Remover marcador anterior
+        // Remover todos los marcadores anteriores
         if (marker != null) {
-            itemizedOverlay.removeItem(marker);
+            itemizedOverlay.removeAllItems();
         }
         
         // Agregar nuevo marcador
