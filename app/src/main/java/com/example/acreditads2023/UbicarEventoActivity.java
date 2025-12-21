@@ -100,7 +100,7 @@ public class UbicarEventoActivity extends AppCompatActivity implements MapView.O
         task.addOnSuccessListener(new OnSuccessListener<Location>() {
             @Override
             public void onSuccess(Location location) {
-                if (location != null) {
+                if (location != null && !isFinishing()) {
                     currentLocation = location;
                     initializeMap();  // Cambio: Llamar a método para inicializar el mapa
                 }
@@ -164,9 +164,7 @@ public class UbicarEventoActivity extends AppCompatActivity implements MapView.O
         GeoPoint nuevaUbicacion = new GeoPoint(latitud, longitud);
         
         // Remover todos los marcadores anteriores
-        if (marker != null) {
-            itemizedOverlay.removeAllItems();
-        }
+        itemizedOverlay.removeAllItems();
         
         // Agregar nuevo marcador
         marker = new OverlayItem(nombreEvento, nombreEvento, nuevaUbicacion);
