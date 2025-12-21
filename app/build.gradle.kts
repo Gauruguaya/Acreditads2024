@@ -55,7 +55,7 @@ dependencies {
     implementation("androidx.appcompat:appcompat:1.6.1")
     implementation("com.google.android.material:material:1.10.0")
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
-    implementation("com.google.android.gms:play-services-maps:18.1.0")
+    implementation("org.osmdroid:osmdroid-android:6.1.18")
     implementation("com.google.android.gms:play-services-location:21.2.0")
     implementation("androidx.room:room-common:2.6.1")
     implementation("com.google.ar.sceneform:filament-android:1.17.1")
