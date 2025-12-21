@@ -57,6 +57,7 @@ dependencies {
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
     implementation("com.google.android.gms:play-services-maps:18.1.0")
     implementation("com.google.android.gms:play-services-location:21.2.0")
+    implementation("org.osmdroid:osmdroid-android:6.1.18")
     implementation("androidx.room:room-common:2.6.1")
     implementation("com.google.ar.sceneform:filament-android:1.17.1")
     implementation("androidx.media3:media3-common:1.3.1")
